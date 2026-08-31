@@ -1,0 +1,244 @@
+{
+  "company": {
+    "name": "Venus Consultancy",
+    "alternateName": "Venus Hiring",
+    "tagline": "Uniting Technology, Talent & Opportunity",
+    "description": "Venus Consultancy is a premier recruitment agency and executive search firm specializing in Canadian, US, and North American talent acquisition, direct placement, contract staffing, and workforce consulting.",
+    "headquarters": {
+      "toronto": "Corporate Office: #205 - 1085 Bellamy Road North, Toronto, ON M1H 3C7, Canada. Phone: +1-647-616-2677",
+      "usa": "US Customer Service: Phone: +1-248-275-1077",
+      "bangalore": "Global Delivery Hub: Bangalore, Karnataka, India"
+    },
+    "metrics": {
+      "retentionRate": "98.4% candidate retention rate",
+      "shortlistTurnaround": "3 to 5 business days for direct-hire executive roles",
+      "contractTurnaround": "48 hours for contract technical staff augmentation",
+      "guarantee": "Written full replacement guarantee on permanent placements",
+      "screening": "100% technical, code-verified, behavioral, and reference pre-screening"
+    },
+    "website": "https://www.venushiring.ca"
+  },
+  "services": [
+    {
+      "id": "executive-search",
+      "title": "Executive Search & Permanent Direct Placement",
+      "route": "/services/executive-search",
+      "summary": "Precision direct-hire placement and discreet headhunting targeting C-Suite executives, VPs, and specialized technical leaders across Canada and North America.",
+      "targetRoles": [
+        "Chief Executive Officer (CEO)",
+        "Chief Technology Officer (CTO)",
+        "Chief Financial Officer (CFO)",
+        "VP of Engineering",
+        "VP of Enterprise Sales",
+        "Senior Software Architects",
+        "Financial Controllers"
+      ],
+      "keyHighlights": [
+        "Discreet headhunting targeting passive, non-active job seekers",
+        "Calibrated shortlist presented within 3 to 5 business days",
+        "90-day full written replacement guarantee",
+        "100% technical and leadership competency pre-screening"
+      ],
+      "bestFor": "Leadership hiring, critical executive replacements, and specialized senior roles."
+    },
+    {
+      "id": "contract-staffing",
+      "title": "Contract Staffing & Staff Augmentation",
+      "route": "/services/contract-staffing",
+      "summary": "Flexible staff augmentation providing pre-vetted interim technical experts, software developers, project managers, and operational specialists.",
+      "targetRoles": [
+        "Interim Software Engineers",
+        "Contract DevOps Specialists",
+        "Agile Project Managers",
+        "QA Automation Leads",
+        "Systems Engineers"
+      ],
+      "keyHighlights": [
+        "Rapid 48-hour onboarding turnaround",
+        "Transparent hourly billing rates",
+        "Zero long-term lock-in commitments",
+        "Full Canadian/US payroll and tax compliance"
+      ],
+      "bestFor": "Project acceleration, temporary skill gap coverage, and flexible scaling."
+    },
+    {
+      "id": "startup-hiring",
+      "title": "Startup & Scaleup Hiring Solutions",
+      "route": "/services/startup-hiring",
+      "summary": "Dedicated recruitment packages tailored for seed, Series A, and scaleup technology companies needing to build founding engineering teams fast.",
+      "targetRoles": [
+        "Founding Software Engineers",
+        "Lead AI Researchers",
+        "VP of Product",
+        "First Marketing Leads",
+        "Head of Growth"
+      ],
+      "keyHighlights": [
+        "Flexible equity-aware fee structures",
+        "Rapid founding squad building",
+        "Deep tech startup ecosystem expertise"
+      ],
+      "bestFor": "High-growth tech startups and venture-backed scaleups."
+    },
+    {
+      "id": "talent-consulting",
+      "title": "Strategic Talent & Workforce Consulting",
+      "route": "/services/talent-consulting",
+      "summary": "Workforce architecture, compensation benchmarking, employer branding, and organizational design for scaling companies.",
+      "targetRoles": [
+        "HR Directors",
+        "Talent Acquisition Leads",
+        "Compensation Managers"
+      ],
+      "keyHighlights": [
+        "Compensation structure design & salary benchmarking",
+        "Technical hiring workflow optimization",
+        "Employer value proposition (EVP) consulting",
+        "Retention audits & turnover reduction strategies"
+      ],
+      "bestFor": "Companies expanding workforce or restructuring compensation."
+    },
+    {
+      "id": "fractional-hr",
+      "title": "Fractional HR & HR Advisory Solutions",
+      "route": "/services/fractional-hr",
+      "summary": "On-demand Chief Human Resources Officer (CHRO) leadership, Canadian work permit/LMIA compliance, performance management, and HR policy setup.",
+      "targetRoles": [
+        "Fractional CHRO",
+        "HR Compliance Specialists",
+        "Immigration & LMIA Advisors"
+      ],
+      "keyHighlights": [
+        "Fractional CHRO executive guidance",
+        "Canadian LMIA & Express Entry work-permit guidance",
+        "HR policy setup and labor law compliance",
+        "Performance appraisal frameworks"
+      ],
+      "bestFor": "Mid-sized businesses needing senior HR leadership without full-time C-suite overhead."
+    },
+    {
+      "id": "sow-project-pods",
+      "title": "SOW Project Pods & Managed Teams",
+      "route": "/services/sow-project-pods",
+      "summary": "Turnkey managed software engineering and technology pods delivered on a Statement of Work (SOW) deliverables basis with strict SLAs.",
+      "targetRoles": [
+        "Full-Stack Engineering Squads",
+        "Cloud Migration Pods",
+        "Data Engineering Teams",
+        "QA Automation Squads"
+      ],
+      "keyHighlights": [
+        "Deliverable-based milestone contracts",
+        "Dedicated technical project managers",
+        "Strict SLA & code quality guarantees"
+      ],
+      "bestFor": "Turnkey software product development and IT modernization projects."
+    }
+  ],
+  "industries": [
+    {
+      "id": "technology",
+      "title": "Technology, Software & AI Practice",
+      "route": "/industries/technology",
+      "summary": "Specialized recruitment for software engineering, AI/ML, cloud architecture, cybersecurity, and product management across North America.",
+      "roles": ["Full-Stack Engineers (React, Node, Python, Go)", "AI/LLM Engineers", "MLOps Leads", "Cloud Architects (AWS, GCP)", "CISO Security Leads"]
+    },
+    {
+      "id": "finance",
+      "title": "Finance, Accounting & Banking Practice",
+      "route": "/industries/finance",
+      "summary": "Placement of CPAs, Financial Controllers, Investment Analysts, Risk Managers, and Fintech Software Engineers.",
+      "roles": ["Chief Financial Officer (CFO)", "Financial Controller (CPA)", "Senior Accountant", "Quantitative Analyst", "Risk Lead"]
+    },
+    {
+      "id": "manufacturing",
+      "title": "Advanced Manufacturing & Operations Practice",
+      "route": "/industries/manufacturing",
+      "summary": "Recruitment of plant directors, industrial automation engineers, supply chain leads, and quality assurance directors.",
+      "roles": ["Plant Operations Director", "Automation Engineer", "Supply Chain Manager", "QA Director", "Process Engineer"]
+    },
+    {
+      "id": "automotive",
+      "title": "Automotive, EV & Supply Chain Practice",
+      "route": "/industries/automotive",
+      "summary": "Recruitment for EV battery technology, autonomous systems, automotive assembly engineering, and international automotive supply chain.",
+      "roles": ["EV Battery Systems Engineer", "Autonomous Vehicle Software Lead", "Automotive Supply Chain Director", "Quality Engineer"]
+    },
+    {
+      "id": "aerospace",
+      "title": "Aerospace & Defense Engineering Practice",
+      "route": "/industries/aerospace",
+      "summary": "Recruitment of avionics architects, defense compliance leads, systems engineers, and aerospace manufacturing specialists.",
+      "roles": ["Lead Avionics Architect", "Defense Systems Engineer", "Aerospace Project Manager", "Propulsion Engineer"]
+    },
+    {
+      "id": "trades",
+      "title": "Skilled Trades & Field Technical Services Practice",
+      "route": "/industries/trades",
+      "summary": "Placement of licensed industrial electricians, millwrights, HVAC field technicians, and trade supervisors across Canada.",
+      "roles": ["Licensed Industrial Electrician (309A/442A)", "Red Seal Millwright", "HVAC Technician", "Field Service Engineer", "Trades Supervisor"]
+    }
+  ],
+  "careers": {
+    "summary": "Browse live career opportunities across Technology, Engineering, Finance, Operations, and Management with Venus Hiring.",
+    "candidateCost": "Venus Hiring recruitment services are 100% FREE for job seekers. Employers pay all fees.",
+    "screeningProcess": "30-minute discovery call with a talent partner covering technical skills, career goals, and compensation expectations.",
+    "route": "/careers",
+    "resumeBuilder": {
+      "title": "Free ATS-Friendly Resume Builder",
+      "summary": "Free online tool provided by Venus Hiring to create professional, ATS-optimized resumes.",
+      "route": "/careers/resume-builder"
+    }
+  },
+  "tools": [
+    {
+      "id": "salary-check-ai",
+      "title": "Salary Check AI (Compensation Intelligence)",
+      "route": "/salary-check",
+      "summary": "Single-page AI-powered compensation benchmarking tool calculating personalized market salary baselines based on role, skills, experience, and location."
+    },
+    {
+      "id": "salary-calculator",
+      "title": "Salary Calculator (Take-Home Pay & Cost of Living)",
+      "route": "/salary-calculator",
+      "summary": "Take-home pay, tax deduction, and cost-of-living comparison calculator for Canadian and North American locations."
+    },
+    {
+      "id": "resume-builder",
+      "title": "Free ATS Resume Builder",
+      "route": "/careers/resume-builder",
+      "summary": "Online tool to craft clean, ATS-formatted resumes optimized for corporate applicant tracking systems."
+    }
+  ],
+  "contact": {
+    "summary": "Connect directly with Venus Consultancy talent acquisition partners or schedule a hiring consultation.",
+    "email": "info@venushiring.ca",
+    "phoneToronto": "+1-647-616-2677",
+    "phoneUS": "+1-248-275-1077",
+    "addressToronto": "#205 - 1085 Bellamy Road North, Toronto, ON M1H 3C7, Canada",
+    "addressBangalore": "Bangalore, Karnataka, India",
+    "route": "/contact"
+  },
+  "faq": [
+    {
+      "question": "What is the turnaround time for candidate shortlists?",
+      "answer": "For permanent direct-hire placement, Venus presents a calibrated candidate shortlist within 3 to 5 business days. For contract staffing, technical contractors can be onboarded within 48 hours."
+    },
+    {
+      "question": "Does Venus offer a placement guarantee?",
+      "answer": "Yes. Venus Consultancy provides a written full replacement guarantee on permanent placements."
+    },
+    {
+      "question": "How does Venus screen technical candidates?",
+      "answer": "100% of technical candidates undergo code-verified technical assessments, structural behavioral interviews, and thorough background/reference checks before presentation."
+    },
+    {
+      "question": "Does Venus assist with Canadian work permits and LMIA?",
+      "answer": "Yes. Through our Fractional HR & Advisory practice, Venus provides guidance on Canadian LMIA applications, Express Entry transitions, and work permit compliance."
+    },
+    {
+      "question": "Is there any fee for job seekers or candidates?",
+      "answer": "No. All Venus recruitment services are 100% free for job candidates. Hiring employers pay all recruitment fees."
+    }
+  ]
+}
