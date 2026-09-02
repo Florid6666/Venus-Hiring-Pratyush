@@ -229,8 +229,29 @@ function BlogDetailPage() {
   // SEO Meta & Schemas
   const pageTitle = blog.seo?.metaTitle || `${blog.title} | Venus Hiring`;
   const pageDescription = blog.seo?.metaDescription || blog.excerpt;
-  const canonicalUrl = blog.seo?.canonicalUrl || currentUrl;
-  const featuredImg = blog.featuredImage || DEFAULT_FALLBACK_IMAGE;
+  // Extract first image from content blocks or body if present
+  const contentFirstImage =
+    blog.contentBlocks?.find((b) => b.type === "image" && b.mediaUrl)?.mediaUrl;
+
+  const contentHasImages = Boolean(
+    contentFirstImage ||
+    (blog.content && (blog.content.includes("<img") || blog.content.includes("<figure")))
+  );
+
+  const hasCustomFeaturedImage = Boolean(
+    blog.featuredImage &&
+    blog.featuredImage !== DEFAULT_FALLBACK_IMAGE &&
+    !blog.featuredImage.includes("photo-1522071820081-009f0129c71c")
+  );
+
+  // Show top hero banner only if the admin gave a featured image AND it is not duplicated in the content body
+  const showTopHeroImage = hasCustomFeaturedImage && !contentHasImages;
+
+  // For SEO meta image, use admin's image (either featuredImage or content block image) or fallback
+  const featuredImg =
+    (hasCustomFeaturedImage ? blog.featuredImage : contentFirstImage) ||
+    blog.featuredImage ||
+    DEFAULT_FALLBACK_IMAGE;
 
   // JSON-LD Schemas
   const articleSchema = {
@@ -472,15 +493,17 @@ function BlogDetailPage() {
                 </div>
               </div>
 
-              {/* FEATURED HERO IMAGE */}
-              <div className="my-8 overflow-hidden rounded-3xl border border-border shadow-xl aspect-[16/9] max-h-[520px]">
-                <img
-                  src={featuredImg}
-                  alt={blog.title}
-                  loading="eager"
-                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.02]"
-                />
-              </div>
+              {/* FEATURED HERO IMAGE - Only displayed if explicitly provided and not already present in article content */}
+              {showTopHeroImage && (
+                <div className="my-8 overflow-hidden rounded-3xl border border-border shadow-xl aspect-[16/9] max-h-[520px]">
+                  <img
+                    src={blog.featuredImage}
+                    alt={blog.title}
+                    loading="eager"
+                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.02]"
+                  />
+                </div>
+              )}
             </header>
 
             {/* MAIN DESKTOP GRID (Left: 70% Article Content / Right: 30% Sidebar with ONE LARGE TOC CARD) */}

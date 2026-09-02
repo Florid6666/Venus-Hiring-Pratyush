@@ -151,8 +151,7 @@ export function BlogAdmin({ isOpen, onClose }: BlogAdminProps) {
       content: "",
       contentBlocks: [],
       faqs: [],
-      featuredImage:
-        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&h=800&fit=crop&auto=format",
+      featuredImage: "",
       author: {
         name: "Subhram Nayak",
         role: "Head of Placement",
@@ -390,8 +389,22 @@ export function BlogAdmin({ isOpen, onClose }: BlogAdminProps) {
 
     const compiledHtml = compileBlocksToHtml();
 
+    // Auto-resolve featuredImage from first image block if not explicitly set
+    const firstImageBlock = formData.contentBlocks?.find(
+      (b) => b.type === "image" && b.mediaUrl
+    );
+    let resolvedFeaturedImage = formData.featuredImage;
+    if (
+      (!resolvedFeaturedImage ||
+        resolvedFeaturedImage.includes("photo-1522071820081-009f0129c71c")) &&
+      firstImageBlock?.mediaUrl
+    ) {
+      resolvedFeaturedImage = firstImageBlock.mediaUrl;
+    }
+
     const postPayload = {
       ...formData,
+      featuredImage: resolvedFeaturedImage,
       content: compiledHtml || formData.content,
     };
 
