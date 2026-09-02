@@ -272,13 +272,16 @@ function BlogArchivePage() {
                         <div className="pt-6 border-t border-slate-100 flex items-center justify-between">
                           <div className="flex items-center gap-3">
                             <img
-                              src={featuredPost.author.avatar}
-                              alt={featuredPost.author.name}
+                              src={
+                                featuredPost.author?.avatar ||
+                                "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop"
+                              }
+                              alt={featuredPost.author?.name || "Venus Team"}
                               className="h-10 w-10 rounded-full object-cover border border-slate-200"
                             />
                             <div>
-                              <p className="text-xs font-extrabold text-slate-900">{featuredPost.author.name}</p>
-                              <p className="text-[11px] font-semibold text-slate-500">{featuredPost.author.role}</p>
+                              <p className="text-xs font-extrabold text-slate-900">{featuredPost.author?.name || "Venus Hiring Team"}</p>
+                              <p className="text-[11px] font-medium text-slate-500">{featuredPost.author?.role || "Workforce Specialist"}</p>
                             </div>
                           </div>
 
@@ -400,11 +403,14 @@ function BlogArchivePage() {
                           <div className="mt-6 pt-5 border-t border-slate-100 flex items-center justify-between">
                             <div className="flex items-center gap-2.5">
                               <img
-                                src={post.author.avatar}
-                                alt={post.author.name}
+                                src={
+                                  post.author?.avatar ||
+                                  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop"
+                                }
+                                alt={post.author?.name || "Venus Team"}
                                 className="h-8 w-8 rounded-full object-cover border border-slate-200"
                               />
-                              <span className="text-xs font-bold text-slate-800">{post.author.name}</span>
+                              <span className="text-xs font-bold text-slate-800">{post.author?.name || "Venus Hiring Team"}</span>
                             </div>
 
                             <Link

@@ -71,10 +71,14 @@ function BlogDetailPage() {
 
   const articleContentRef = useRef<HTMLDivElement | null>(null);
 
-  // Find matching blog by slug or ID
-  const blog = blogs.find(
-    (b) => b.slug === slug || b.id === slug || encodeURIComponent(b.slug) === slug
-  );
+  // Find matching blog by slug or ID (case-insensitive & URL-decoded)
+  const decodedSlug = decodeURIComponent(slug || "").toLowerCase().trim();
+  const blog = blogs.find((b) => {
+    if (!b) return false;
+    const s = (b.slug || "").toLowerCase().trim();
+    const id = (b.id || "").toLowerCase().trim();
+    return s === decodedSlug || id === decodedSlug || b.slug === slug || b.id === slug;
+  });
 
   // Compute Related Articles & Adjacent Previous/Next Posts
   const relatedArticles = blog ? getRelatedArticles(blog, blogs, 3) : [];
@@ -228,7 +232,9 @@ function BlogDetailPage() {
 
   // SEO Meta & Schemas
   const pageTitle = blog.seo?.metaTitle || `${blog.title} | Venus Hiring`;
-  const pageDescription = blog.seo?.metaDescription || blog.excerpt;
+  const pageDescription = blog.seo?.metaDescription || blog.excerpt || "";
+  const canonicalUrl = blog.seo?.canonicalUrl || currentUrl || "https://venus-hiring.vercel.app/blog";
+
   // Extract first image from content blocks or body if present
   const contentFirstImage =
     blog.contentBlocks?.find((b) => b.type === "image" && b.mediaUrl)?.mediaUrl;
@@ -258,12 +264,12 @@ function BlogDetailPage() {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: blog.title,
-    description: blog.excerpt,
+    description: blog.excerpt || "",
     image: [featuredImg],
     author: {
       "@type": "Person",
-      name: blog.author.name,
-      jobTitle: blog.author.role,
+      name: blog.author?.name || "Venus Hiring Team",
+      jobTitle: blog.author?.role || "Workforce Specialist",
     },
     publisher: {
       "@type": "Organization",
@@ -273,7 +279,7 @@ function BlogDetailPage() {
         url: "https://venus-hiring.vercel.app/favicon.ico",
       },
     },
-    datePublished: blog.publishDate,
+    datePublished: blog.publishDate || new Date().toISOString(),
     mainEntityOfPage: canonicalUrl,
   };
 
@@ -309,10 +315,10 @@ function BlogDetailPage() {
           "@type": "FAQPage",
           mainEntity: blog.faqs.map((faq) => ({
             "@type": "Question",
-            name: faq.question,
+            name: faq.q || (faq as any).question || "Question",
             acceptedAnswer: {
               "@type": "Answer",
-              text: faq.answer,
+              text: faq.a || (faq as any).answer || "",
             },
           })),
         }
