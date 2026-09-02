@@ -951,9 +951,23 @@ const INDUSTRIES = [
 
 // 3 slides with 3 cards each (9 cards total)
 const INDUSTRY_SLIDES = [
-  INDUSTRIES.slice(0, 3), // [01, 02, 03]
-  INDUSTRIES.slice(3, 6), // [04, 05, 06]
-  INDUSTRIES.slice(6, 9), // [07, 08, 09]
+  INDUSTRIES.slice(0, 3), // Slide 0: [01, 02, 03]
+  INDUSTRIES.slice(3, 6), // Slide 1: [04, 05, 06]
+  INDUSTRIES.slice(6, 9), // Slide 2: [07, 08, 09]
+];
+
+// 5-element buffer for seamless 2-way infinite loop
+// Index 0: Clone of Slide 2
+// Index 1: Slide 0 (Cards 01, 02, 03)
+// Index 2: Slide 1 (Cards 04, 05, 06)
+// Index 3: Slide 2 (Cards 07, 08, 09)
+// Index 4: Clone of Slide 0
+const INFINITE_SLIDES = [
+  INDUSTRY_SLIDES[2],
+  INDUSTRY_SLIDES[0],
+  INDUSTRY_SLIDES[1],
+  INDUSTRY_SLIDES[2],
+  INDUSTRY_SLIDES[0],
 ];
 
 const BOTTOM_HIGHLIGHTS = [
@@ -980,15 +994,47 @@ const BOTTOM_HIGHLIGHTS = [
 ];
 
 export function Industries() {
-  const [activePageIndex, setActivePageIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(1);
+  const [isTransitioning, setIsTransitioning] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
 
+  // Auto-advance every 1.5 seconds in a continuous loop
+  useEffect(() => {
+    if (isHovered) return;
+    const timer = setInterval(() => {
+      setIsTransitioning(true);
+      setCurrentIndex((prev) => prev + 1);
+    }, 1500);
+
+    return () => clearInterval(timer);
+  }, [isHovered, currentIndex]);
+
   const prevSlide = () => {
-    setActivePageIndex((prev) => (prev > 0 ? prev - 1 : INDUSTRY_SLIDES.length - 1));
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => prev - 1);
   };
 
   const nextSlide = () => {
-    setActivePageIndex((prev) => (prev < INDUSTRY_SLIDES.length - 1 ? prev + 1 : 0));
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => prev + 1);
+  };
+
+  const goToSlide = (slideIdx: number) => {
+    setIsTransitioning(true);
+    setCurrentIndex(slideIdx + 1);
+  };
+
+  const handleTransitionEnd = () => {
+    if (currentIndex === 4) {
+      // Arrived at Clone of Slide 0, jump immediately to real Slide 0 (index 1) without animation
+      setIsTransitioning(false);
+      setCurrentIndex(1);
+    } else if (currentIndex === 0) {
+      // Arrived at Clone of Slide 2, jump immediately to real Slide 2 (index 3) without animation
+      setIsTransitioning(false);
+      setCurrentIndex(3);
+    }
   };
 
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -1005,6 +1051,9 @@ export function Industries() {
     }
     setTouchStartX(null);
   };
+
+  // Maps currentIndex (0 to 4) to real slide index (0, 1, 2)
+  const activeIndicatorIndex = (currentIndex - 1 + 3) % 3;
 
   return (
     <section
@@ -1141,11 +1190,11 @@ export function Industries() {
                 <button
                   key={idx}
                   type="button"
-                  onClick={() => setActivePageIndex(idx)}
+                  onClick={() => goToSlide(idx)}
                   aria-label={`Go to slide ${idx + 1}`}
                   className={cn(
                     "h-1 rounded-full transition-all duration-300 cursor-pointer",
-                    activePageIndex === idx
+                    activeIndicatorIndex === idx
                       ? "w-8 bg-[#dc2626]"
                       : "w-8 bg-slate-200 hover:bg-slate-300"
                   )}
@@ -1155,17 +1204,25 @@ export function Industries() {
           </div>
         </div>
 
-        {/* 3-Cards Per Slide Smooth Transition Container */}
+        {/* 3-Cards Per Slide Infinite Loop Smooth Transition Container */}
         <div
           className="relative overflow-hidden w-full py-2"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
           <div
-            className="flex transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]"
-            style={{ transform: `translateX(-${activePageIndex * 100}%)` }}
+            className="flex"
+            onTransitionEnd={handleTransitionEnd}
+            style={{
+              transform: `translateX(-${currentIndex * 100}%)`,
+              transition: isTransitioning
+                ? "transform 550ms cubic-bezier(0.25, 1, 0.5, 1)"
+                : "none",
+            }}
           >
-            {INDUSTRY_SLIDES.map((slideCards, slideIdx) => (
+            {INFINITE_SLIDES.map((slideCards, slideIdx) => (
               <div
                 key={slideIdx}
                 className="w-full shrink-0 grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6 px-0.5"
