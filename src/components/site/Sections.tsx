@@ -32,7 +32,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useReveal } from "@/hooks/use-reveal";
-import { CtaLink, SectionHeading } from "./primitives";
+import { CtaLink, Eyebrow, SectionHeading } from "./primitives";
 import whyImg from "@/assets/hero-team.jpg";
 import employersImg from "@/assets/employers-card.png";
 import professionalsImg from "@/assets/professionals-card.png";
@@ -1151,14 +1151,14 @@ export function Industries() {
         {/* Header Section */}
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between mb-10 sm:mb-12">
           <div className="max-w-2xl">
-            <p className="text-[#dc2626] font-bold text-xs tracking-[0.18em] uppercase mb-2 sm:mb-2.5">
-              INDUSTRIES & ROLES
-            </p>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-[46px] font-bold text-slate-900 tracking-tight leading-[1.12]">
+            <div className="mb-3">
+              <Eyebrow>INDUSTRIES & ROLES</Eyebrow>
+            </div>
+            <h2 className="text-3xl font-semibold leading-[1.08] sm:text-4xl lg:text-[2.9rem] text-foreground tracking-tight">
               Industries & Roles <br />
-              <span className="text-[#dc2626]">We Hire For</span>
+              <span className="text-brand">We Hire For</span>
             </h2>
-            <p className="mt-3.5 text-sm sm:text-base text-slate-600 font-normal leading-relaxed max-w-xl">
+            <p className="mt-4 text-base sm:text-lg leading-relaxed text-muted-foreground max-w-xl">
               Explore the specialized technical, executive, and operational positions we recruit across Canada and North America.
             </p>
           </div>
@@ -1170,7 +1170,7 @@ export function Industries() {
                 type="button"
                 onClick={prevSlide}
                 aria-label="Previous 3 industries"
-                className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-xs transition-all duration-200 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 active:scale-95 cursor-pointer"
+                className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-border bg-background text-foreground shadow-xs transition-all duration-200 hover:border-brand/50 hover:bg-brand-soft hover:text-brand active:scale-95 cursor-pointer"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
@@ -1178,7 +1178,7 @@ export function Industries() {
                 type="button"
                 onClick={nextSlide}
                 aria-label="Next 3 industries"
-                className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-xs transition-all duration-200 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 active:scale-95 cursor-pointer"
+                className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-border bg-background text-foreground shadow-xs transition-all duration-200 hover:border-brand/50 hover:bg-brand-soft hover:text-brand active:scale-95 cursor-pointer"
               >
                 <ChevronRight className="h-4 w-4" />
               </button>
@@ -1195,8 +1195,8 @@ export function Industries() {
                   className={cn(
                     "h-1 rounded-full transition-all duration-300 cursor-pointer",
                     activeIndicatorIndex === idx
-                      ? "w-8 bg-[#dc2626]"
-                      : "w-8 bg-slate-200 hover:bg-slate-300"
+                      ? "w-8 bg-brand"
+                      : "w-8 bg-muted hover:bg-muted-foreground/30"
                   )}
                 />
               ))}
@@ -1232,51 +1232,51 @@ export function Industries() {
                   return (
                     <div
                       key={ind.id}
-                      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl"
+                      className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-brand/50 hover:shadow-xl"
                     >
                       {/* Image Header with Number Badge */}
-                      <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-slate-100">
+                      <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-muted">
                         <img
                           src={ind.image}
                           alt={ind.title}
                           loading="lazy"
                           className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                         />
-                        <span className="absolute top-3 right-3 rounded-full bg-slate-900/80 backdrop-blur-md px-2.5 py-0.5 text-[11px] font-mono font-bold text-white/95 shadow-xs">
+                        <span className="absolute top-3 right-3 rounded-full bg-black/75 backdrop-blur-md px-2.5 py-0.5 text-[11px] font-mono font-bold text-white shadow-xs">
                           {ind.id}
                         </span>
                       </div>
 
                       {/* Overlapping Floating Circle Icon Badge */}
-                      <div className="-mt-5 ml-4 relative z-10 flex h-10 w-10 items-center justify-center rounded-full border border-rose-100 bg-white text-[#dc2626] shadow-sm">
+                      <div className="-mt-5 ml-4 relative z-10 flex h-10 w-10 items-center justify-center rounded-full border border-brand/20 bg-background text-brand shadow-sm">
                         <IndIcon className="h-4 w-4" />
                       </div>
 
                       {/* Card Body */}
                       <div className="flex flex-1 flex-col px-5 pt-2.5 pb-5 space-y-3">
                         <div>
-                          <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">
+                          <p className="text-[11px] font-bold uppercase tracking-wider text-brand mb-1">
                             {ind.category}
                           </p>
-                          <h3 className="font-serif text-lg font-bold text-slate-900 transition-colors duration-200 group-hover:text-[#dc2626] leading-snug">
+                          <h3 className="text-xl font-bold tracking-tight text-foreground transition-colors duration-200 group-hover:text-brand leading-snug">
                             {ind.title}
                           </h3>
                         </div>
 
-                        <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
+                        <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed line-clamp-2">
                           {ind.copy}
                         </p>
 
                         {/* Roles We Hire For */}
                         <div className="pt-1">
-                          <p className="text-[10px] font-bold uppercase tracking-wider text-[#dc2626] mb-2">
+                          <p className="text-[10px] font-bold uppercase tracking-wider text-brand mb-2">
                             ROLES WE HIRE FOR:
                           </p>
                           <div className="flex flex-wrap gap-1.5 min-h-[58px]">
                             {ind.roles.map((role) => (
                               <span
                                 key={role}
-                                className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-medium text-slate-700 transition-colors group-hover:bg-slate-200/70"
+                                className="inline-flex items-center rounded-full bg-secondary px-2.5 py-1 text-[11px] font-medium text-secondary-foreground transition-colors group-hover:bg-secondary/80"
                               >
                                 {role}
                               </span>
@@ -1285,13 +1285,13 @@ export function Industries() {
                         </div>
 
                         {/* Bottom Link */}
-                        <div className="pt-3.5 mt-auto border-t border-slate-100">
+                        <div className="pt-3.5 mt-auto border-t border-border/60">
                           <a
                             href={ind.slug ? `/industries/${ind.slug}` : "/industries"}
-                            className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-900 transition-colors group-hover:text-[#dc2626]"
+                            className="inline-flex items-center gap-1.5 text-xs font-bold text-foreground transition-colors group-hover:text-brand"
                           >
                             <span>{ind.ctaText}</span>
-                            <span className="text-[#dc2626] font-bold text-sm transition-transform duration-200 group-hover:translate-x-1">
+                            <span className="text-brand font-bold text-sm transition-transform duration-200 group-hover:translate-x-1">
                               →
                             </span>
                           </a>
@@ -1306,7 +1306,7 @@ export function Industries() {
         </div>
 
         {/* Bottom Feature Strip (Diverse Industries, Vetted & Verified, Future-Ready, North America Focus) */}
-        <div className="mt-10 sm:mt-12 rounded-2xl border border-slate-200/90 bg-white p-5 sm:p-6 shadow-xs grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-0 lg:divide-x lg:divide-slate-100">
+        <div className="mt-10 sm:mt-12 rounded-2xl border border-border bg-card p-5 sm:p-6 shadow-xs grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-0 lg:divide-x lg:divide-border/60">
           {BOTTOM_HIGHLIGHTS.map((item) => {
             const { icon: FeatureIcon } = item;
             return (
@@ -1314,14 +1314,14 @@ export function Industries() {
                 key={item.title}
                 className="flex items-center gap-3.5 lg:px-5 first:pl-0 last:pr-0"
               >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-rose-100 bg-rose-50 text-[#dc2626]">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-brand/20 bg-brand-soft text-brand">
                   <FeatureIcon className="h-4 w-4" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-slate-900 leading-tight">
+                  <h4 className="text-sm font-bold text-foreground leading-tight">
                     {item.title}
                   </h4>
-                  <p className="text-xs text-slate-500 font-normal mt-0.5 leading-snug">
+                  <p className="text-xs text-muted-foreground font-normal mt-0.5 leading-snug">
                     {item.description}
                   </p>
                 </div>
