@@ -14,7 +14,9 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AiAssistantRouteImport } from './routes/ai-assistant'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as FindJobsRouteImport } from './routes/find-jobs'
 import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as JobsRouteImport } from './routes/jobs'
 import { Route as Salary2RouteImport } from './routes/salary-2'
 import { Route as SalaryCalculatorRouteImport } from './routes/salary-calculator'
 import { Route as SalaryCheckRouteImport } from './routes/salary-check'
@@ -68,9 +70,19 @@ const FaqRoute = FaqRouteImport.update({
   path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FindJobsRoute = FindJobsRouteImport.update({
+  id: '/find-jobs',
+  path: '/find-jobs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GalleryRoute = GalleryRouteImport.update({
   id: '/gallery',
   path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JobsRoute = JobsRouteImport.update({
+  id: '/jobs',
+  path: '/jobs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Salary2Route = Salary2RouteImport.update({
@@ -215,7 +227,9 @@ export interface FileRoutesByFullPath {
   '/ai-assistant': typeof AiAssistantRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
+  '/find-jobs': typeof FindJobsRoute
   '/gallery': typeof GalleryRoute
+  '/jobs': typeof JobsRoute
   '/salary-2': typeof Salary2Route
   '/salary-calculator': typeof SalaryCalculatorRoute
   '/salary-check': typeof SalaryCheckRoute
@@ -250,7 +264,9 @@ export interface FileRoutesByTo {
   '/ai-assistant': typeof AiAssistantRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
+  '/find-jobs': typeof FindJobsRoute
   '/gallery': typeof GalleryRoute
+  '/jobs': typeof JobsRoute
   '/salary-2': typeof Salary2Route
   '/salary-calculator': typeof SalaryCalculatorRoute
   '/salary-check': typeof SalaryCheckRoute
@@ -286,7 +302,9 @@ export interface FileRoutesById {
   '/ai-assistant': typeof AiAssistantRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
+  '/find-jobs': typeof FindJobsRoute
   '/gallery': typeof GalleryRoute
+  '/jobs': typeof JobsRoute
   '/salary-2': typeof Salary2Route
   '/salary-calculator': typeof SalaryCalculatorRoute
   '/salary-check': typeof SalaryCheckRoute
@@ -323,7 +341,9 @@ export interface FileRouteTypes {
     | '/ai-assistant'
     | '/contact'
     | '/faq'
+    | '/find-jobs'
     | '/gallery'
+    | '/jobs'
     | '/salary-2'
     | '/salary-calculator'
     | '/salary-check'
@@ -358,7 +378,9 @@ export interface FileRouteTypes {
     | '/ai-assistant'
     | '/contact'
     | '/faq'
+    | '/find-jobs'
     | '/gallery'
+    | '/jobs'
     | '/salary-2'
     | '/salary-calculator'
     | '/salary-check'
@@ -393,7 +415,9 @@ export interface FileRouteTypes {
     | '/ai-assistant'
     | '/contact'
     | '/faq'
+    | '/find-jobs'
     | '/gallery'
+    | '/jobs'
     | '/salary-2'
     | '/salary-calculator'
     | '/salary-check'
@@ -429,7 +453,9 @@ export interface RootRouteChildren {
   AiAssistantRoute: typeof AiAssistantRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
+  FindJobsRoute: typeof FindJobsRoute
   GalleryRoute: typeof GalleryRoute
+  JobsRoute: typeof JobsRoute
   Salary2Route: typeof Salary2Route
   SalaryCalculatorRoute: typeof SalaryCalculatorRoute
   SalaryCheckRoute: typeof SalaryCheckRoute
@@ -494,11 +520,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/find-jobs': {
+      id: '/find-jobs'
+      path: '/find-jobs'
+      fullPath: '/find-jobs'
+      preLoaderRoute: typeof FindJobsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/gallery': {
       id: '/gallery'
       path: '/gallery'
       fullPath: '/gallery'
       preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/jobs': {
+      id: '/jobs'
+      path: '/jobs'
+      fullPath: '/jobs'
+      preLoaderRoute: typeof JobsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/salary-2': {
@@ -721,7 +761,9 @@ const rootRouteChildren: RootRouteChildren = {
   AiAssistantRoute: AiAssistantRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
+  FindJobsRoute: FindJobsRoute,
   GalleryRoute: GalleryRoute,
+  JobsRoute: JobsRoute,
   Salary2Route: Salary2Route,
   SalaryCalculatorRoute: SalaryCalculatorRoute,
   SalaryCheckRoute: SalaryCheckRoute,

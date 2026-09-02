@@ -533,7 +533,7 @@ export function CtaBanner() {
               </a>
 
               <a
-                href="https://www.venushiring.ca/find-jobs"
+                href="/careers"
                 className="group inline-flex items-center justify-center gap-2.5 rounded-xl border-2 border-brand bg-white px-7 py-3.5 text-base font-semibold text-brand transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-brand/5 hover:shadow-md"
               >
                 Explore Career Opportunities

@@ -155,7 +155,7 @@ export function WhoWeServe() {
       icon: Users,
       copy: "Discover career opportunities matched to your experience, skills and goals.",
       ctaText: "Find Jobs →",
-      href: "https://www.venushiring.ca/jobs",
+      href: "/careers",
       tag: "For Candidates",
       image:
         "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1000&h=750&fit=crop&auto=format",
