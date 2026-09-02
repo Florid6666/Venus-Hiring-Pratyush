@@ -13,6 +13,7 @@ import {
   Crown,
   Factory,
   FlaskConical,
+  Globe,
   Globe2,
   Handshake,
   Headphones,
@@ -795,114 +796,128 @@ export function Services() {
 const INDUSTRIES = [
   {
     id: "01",
-    slug: "finance-corporate",
-    name: "Finance & Accounting",
-    icon: Building2,
-    copy: "Connecting top financial controllers, CPAs, FP&A leaders, and finance managers to drive fiscal performance.",
+    slug: "technology",
+    category: "TECHNOLOGY",
+    title: "Engineering & IT",
+    copy: "Building intelligent, secure, and scalable solutions for a connected future.",
     roles: [
-      "Financial Controller",
-      "Senior Accountant",
-      "FP&A Specialist",
-      "CFO / Finance Director",
+      "Software Engineers",
+      "Data Engineers",
+      "DevOps Specialists",
+      "Product Leaders",
     ],
+    ctaText: "Explore Technology Roles",
+    icon: Cpu,
     image:
-      "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=600&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=500&fit=crop&auto=format",
   },
   {
     id: "02",
-    slug: "technology",
-    name: "Technology",
-    icon: Cpu,
-    copy: "High-caliber engineering, AI, cloud, cybersecurity, and product leaders built for rapid technical execution.",
-    roles: [
-      "Full Stack & Software Engineers",
-      "AI / ML & Data Engineers",
-      "Cloud & DevOps Specialists",
-      "CTO & Product Leaders",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop&auto=format",
-  },
-  {
-    id: "03",
     slug: "automotive-ev",
-    name: "Automotive & EV",
-    icon: Car,
-    copy: "Next-gen mobility leaders across EV battery architecture, plant operations, quality, and autonomous tech.",
+    category: "AUTOMOTIVE & EV",
+    title: "Automotive & EV",
+    copy: "Driving the future of mobility with innovation, quality, and sustainability.",
     roles: [
       "EV Battery Engineers",
       "Automotive Plant Managers",
       "Quality & Controls Engineers",
       "Autonomous Vehicle Engineers",
     ],
+    ctaText: "Explore Automotive Roles",
+    icon: Car,
     image:
-      "https://images.unsplash.com/photo-1563720223185-11003d516935?w=800&h=600&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1563720223185-11003d516935?w=800&h=500&fit=crop&auto=format",
   },
   {
-    id: "04",
+    id: "03",
     slug: "aerospace",
-    name: "Aerospace",
-    icon: Plane,
-    copy: "Certified, compliance-ready aerospace design engineers, avionics specialists, and flight systems talent.",
+    category: "AEROSPACE",
+    title: "Aerospace",
+    copy: "Certified aerospace professionals delivering precision, safety, and performance.",
     roles: [
       "Aerospace Systems Engineers",
       "Avionics Specialists",
       "Flight Test Engineers",
       "Quality & Compliance Leads",
     ],
+    ctaText: "Explore Aerospace Roles",
+    icon: Plane,
     image:
-      "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&h=600&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&h=500&fit=crop&auto=format",
   },
   {
-    id: "05",
+    id: "04",
     slug: "automotive-ev",
-    name: "AutoTech",
-    icon: Zap,
-    copy: "Bridging software innovation with automotive hardware to build connected and autonomous vehicles.",
+    category: "AUTOTECH",
+    title: "AutoTech",
+    copy: "Bridging software innovation with automotive hardware to build smarter vehicles.",
     roles: [
       "Automotive Software Engineers",
       "Embedded Systems Engineers",
       "ADAS Engineers",
       "Connected Vehicle Architects",
     ],
+    ctaText: "Explore AutoTech Roles",
+    icon: Zap,
     image:
-      "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=800&h=600&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=800&h=500&fit=crop&auto=format",
   },
   {
-    id: "06",
+    id: "05",
     slug: "technology",
-    name: "Customer Service & Tech Support",
-    icon: Headphones,
-    copy: "Tier 1-3 support specialists and customer success directors focused on retention, resolution, and satisfaction.",
+    category: "CUSTOMER SUPPORT",
+    title: "Customer Service & Tech Support",
+    copy: "Delivering outstanding support experiences that build trust and loyalty.",
     roles: [
       "Technical Support Leads",
       "Tier 1-3 Support Specialists",
       "Customer Success Directors",
       "CX Managers",
     ],
+    ctaText: "Explore Support Roles",
+    icon: Headphones,
     image:
-      "https://images.unsplash.com/photo-1534536281715-e28d76689b4d?w=800&h=600&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=800&h=500&fit=crop&auto=format",
+  },
+  {
+    id: "06",
+    slug: "finance-corporate",
+    category: "FINANCE & CORPORATE",
+    title: "Finance & Accounting",
+    copy: "Connecting top financial controllers, CPAs, FP&A leaders, and finance managers.",
+    roles: [
+      "Financial Controller",
+      "Senior Accountant",
+      "FP&A Specialist",
+      "CFO / Finance Director",
+    ],
+    ctaText: "Explore Finance Roles",
+    icon: Building2,
+    image:
+      "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=500&fit=crop&auto=format",
   },
   {
     id: "07",
     slug: "finance-corporate",
-    name: "C-Suite & Executive",
-    icon: Crown,
-    copy: "Retained and confidential executive search for visionary CEOs, CTOs, CFOs, VPs, and Board Directors.",
+    category: "EXECUTIVE SEARCH",
+    title: "C-Suite & Executive",
+    copy: "Retained executive search for visionary CEOs, CTOs, CFOs, VPs, and Board Directors.",
     roles: [
       "CEO / President",
-      "Chief Technology Officer (CTO)",
-      "Chief Financial Officer (CFO)",
-      "VP Operations & Engineering",
+      "Chief Technology Officer",
+      "Chief Financial Officer",
+      "VP Operations & Eng.",
     ],
+    ctaText: "Explore Executive Roles",
+    icon: Crown,
     image:
-      "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&h=600&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&h=500&fit=crop&auto=format",
   },
   {
     id: "08",
     slug: "healthcare",
-    name: "Clinical Research",
-    icon: Stethoscope,
+    category: "HEALTHCARE & CLINICAL",
+    title: "Clinical Research",
     copy: "Pharma, biotech, and clinical trial managers ensuring regulatory compliance and trial excellence.",
     roles: [
       "Clinical Research Associates",
@@ -910,50 +925,67 @@ const INDUSTRIES = [
       "Regulatory Affairs Specialists",
       "Biostatisticians",
     ],
+    ctaText: "Explore Healthcare Roles",
+    icon: Stethoscope,
     image:
-      "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&h=600&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&h=500&fit=crop&auto=format",
   },
   {
     id: "09",
-    name: "E-Commerce & Supply Chain",
-    icon: ShoppingBag,
+    slug: "manufacturing-supply-chain",
+    category: "SUPPLY CHAIN & E-COM",
+    title: "E-Commerce & Supply Chain",
     copy: "End-to-end logistics, procurement, warehouse management, and fulfillment operational leaders.",
     roles: [
       "Supply Chain Directors",
-      "Logistics & Procurement Managers",
+      "Logistics Managers",
       "Warehouse Operations Leads",
       "Fulfillment Specialists",
     ],
+    ctaText: "Explore Supply Chain Roles",
+    icon: ShoppingBag,
     image:
-      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=600&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=500&fit=crop&auto=format",
   },
   {
     id: "10",
-    name: "Manufacturing & Skilled Trades",
-    icon: Factory,
+    slug: "manufacturing-supply-chain",
+    category: "MANUFACTURING & TRADES",
+    title: "Manufacturing & Trades",
     copy: "Skilled trades professionals, millwrights, CNC programmers, and industrial plant operations leaders.",
     roles: [
       "Manufacturing Engineers",
-      "CNC Programmers & Machinists",
+      "CNC Programmers",
       "Industrial Millwrights",
       "Plant Production Managers",
     ],
+    ctaText: "Explore Manufacturing Roles",
+    icon: Factory,
     image:
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=500&fit=crop&auto=format",
+  },
+];
+
+const BOTTOM_HIGHLIGHTS = [
+  {
+    icon: Users,
+    title: "Diverse Industries",
+    description: "Experts across high-growth sectors",
   },
   {
-    id: "11",
-    name: "Scientific Outsourcing",
-    icon: FlaskConical,
-    copy: "Specialized lab technicians, chemists, and R&D researchers for contract laboratory engagements.",
-    roles: [
-      "Lab Research Scientists",
-      "Analytical Chemists",
-      "QA/QC Specialists",
-      "R&D Specialists",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=800&h=600&fit=crop&auto=format",
+    icon: ShieldCheck,
+    title: "Vetted & Verified",
+    description: "Top 1% certified professionals",
+  },
+  {
+    icon: TrendingUp,
+    title: "Future-Ready Talent",
+    description: "Built for today. Ready for tomorrow.",
+  },
+  {
+    icon: Globe,
+    title: "North America Focus",
+    description: "Strong presence in Canada & beyond",
   },
 ];
 
@@ -961,64 +993,54 @@ export function Industries() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
+  const [scrollLeftState, setScrollLeftState] = useState(0);
+  const [activePageIndex, setActivePageIndex] = useState(0);
 
-  // Automatic continuous smooth scroll loop
-  useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (media.matches) return;
-    let animId: number;
-    let lastTime = performance.now();
+  const updateActivePage = () => {
+    if (!containerRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
+    const maxScroll = scrollWidth - clientWidth;
+    if (maxScroll <= 0) {
+      setActivePageIndex(0);
+      return;
+    }
+    const ratio = scrollLeft / maxScroll;
+    if (ratio < 0.3) {
+      setActivePageIndex(0);
+    } else if (ratio < 0.7) {
+      setActivePageIndex(1);
+    } else {
+      setActivePageIndex(2);
+    }
+  };
 
-    const scroll = (currentTime: number) => {
-      const delta = currentTime - lastTime;
-      lastTime = currentTime;
+  const handleScroll = () => {
+    updateActivePage();
+  };
 
-      if (!isDragging && !isHovered && containerRef.current) {
-        containerRef.current.scrollLeft += delta * 0.06;
-
-        // Reset scroll position when reaching the end
-        const maxScroll = containerRef.current.scrollWidth - containerRef.current.clientWidth;
-        if (containerRef.current.scrollLeft >= maxScroll - 2) {
-          containerRef.current.scrollLeft = 0;
-        }
-      }
-      animId = requestAnimationFrame(scroll);
-    };
-
-    animId = requestAnimationFrame(scroll);
-    return () => cancelAnimationFrame(animId);
-  }, [isDragging, isHovered]);
-
-  // Pointer drag interaction
   const handlePointerDown = (e: React.PointerEvent) => {
     if (!containerRef.current) return;
     setIsDragging(true);
     setStartX(e.clientX - containerRef.current.offsetLeft);
-    setScrollLeft(containerRef.current.scrollLeft);
+    setScrollLeftState(containerRef.current.scrollLeft);
   };
 
   const handlePointerMove = (e: React.PointerEvent) => {
     if (!isDragging || !containerRef.current) return;
     e.preventDefault();
     const x = e.clientX - containerRef.current.offsetLeft;
-    const walk = (x - startX) * 1.6;
-    containerRef.current.scrollLeft = scrollLeft - walk;
+    const walk = (x - startX) * 1.5;
+    containerRef.current.scrollLeft = scrollLeftState - walk;
+    updateActivePage();
   };
 
   const handlePointerUp = () => {
     setIsDragging(false);
   };
 
-  const pauseTimerRef = useRef<NodeJS.Timeout | null>(null);
-
   const scrollNav = (direction: "left" | "right") => {
     if (!containerRef.current) return;
-    setIsHovered(true);
-    if (pauseTimerRef.current) clearTimeout(pauseTimerRef.current);
-
-    const scrollAmount = 380;
+    const scrollAmount = Math.max(containerRef.current.clientWidth * 0.75, 340);
     const current = containerRef.current.scrollLeft;
     const target = direction === "left" ? current - scrollAmount : current + scrollAmount;
 
@@ -1026,161 +1048,281 @@ export function Industries() {
       left: target,
       behavior: "smooth",
     });
+  };
 
-    pauseTimerRef.current = setTimeout(() => {
-      setIsHovered(false);
-    }, 1800);
+  const goToPage = (pageIdx: number) => {
+    if (!containerRef.current) return;
+    const { scrollWidth, clientWidth } = containerRef.current;
+    const maxScroll = scrollWidth - clientWidth;
+    const target = (pageIdx / 2) * maxScroll;
+    containerRef.current.scrollTo({
+      left: target,
+      behavior: "smooth",
+    });
+    setActivePageIndex(pageIdx);
   };
 
   return (
     <section
       id="industries"
-      className="relative isolate overflow-hidden bg-ink section-padding border-b border-ink-line scroll-mt-20 sm:scroll-mt-24"
+      className="relative isolate overflow-hidden bg-white py-16 sm:py-20 lg:py-24 border-b border-slate-200/80 scroll-mt-20 sm:scroll-mt-24"
       aria-label="Industries and Roles We Hire For"
     >
-      {/* High-tech ambient background glow & mesh grid */}
+      {/* Subtle Dot-Matrix World Map Background on Top Right */}
       <div
-        className="pointer-events-none absolute inset-0 -z-10 dot-grid opacity-[0.18]"
+        className="pointer-events-none absolute right-0 top-0 h-[480px] w-full max-w-2xl opacity-35 select-none overflow-hidden"
         aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute -left-32 top-1/3 -z-10 h-[30rem] w-[30rem] rounded-full bg-brand/20 blur-[150px]"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute -right-32 bottom-1/4 -z-10 h-[28rem] w-[28rem] rounded-full bg-brand/15 blur-[140px]"
-        aria-hidden
-      />
-
-      <div className="shell relative">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <SectionHeading
-            tone="dark"
-            title="Industries & Roles We Hire For"
-            copy="Explore the specialized technical, executive, and operational positions we recruit across Canada and North America."
-          />
-
-          {/* Interactive Controls */}
-          <div className="flex items-center gap-3 shrink-0">
-            <button
-              type="button"
-              onClick={() => scrollNav("left")}
-              aria-label="Scroll left"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-ink-line bg-ink-soft/50 text-ink-foreground transition-all duration-300 hover:scale-105 hover:border-brand hover:bg-brand/20 hover:text-white active:scale-95 shadow-sm"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollNav("right")}
-              aria-label="Scroll right"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-ink-line bg-ink-soft/50 text-ink-foreground transition-all duration-300 hover:scale-105 hover:border-brand hover:bg-brand/20 hover:text-white active:scale-95 shadow-sm"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </button>
-          </div>
-        </div>
+      >
+        <svg
+          viewBox="0 0 700 400"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-full w-full object-contain object-right-top text-slate-300"
+        >
+          <g fill="currentColor">
+            {/* North America Dotted Cluster */}
+            <circle cx="120" cy="90" r="2.5" />
+            <circle cx="140" cy="85" r="2.5" />
+            <circle cx="160" cy="80" r="2.5" />
+            <circle cx="180" cy="75" r="2.5" />
+            <circle cx="130" cy="110" r="2.5" />
+            <circle cx="150" cy="105" r="2.5" />
+            <circle cx="170" cy="100" r="2.5" />
+            <circle cx="190" cy="95" r="2.5" />
+            <circle cx="210" cy="90" r="2.5" />
+            <circle cx="120" cy="130" r="2.5" />
+            <circle cx="140" cy="125" r="2.5" />
+            <circle cx="160" cy="120" r="2.5" />
+            <circle cx="180" cy="115" r="2.5" />
+            <circle cx="200" cy="110" r="2.5" />
+            <circle cx="220" cy="105" r="2.5" />
+            <circle cx="240" cy="100" r="2.5" />
+            <circle cx="140" cy="150" r="2.5" />
+            <circle cx="160" cy="145" r="2.5" />
+            <circle cx="180" cy="140" r="2.5" />
+            <circle cx="200" cy="135" r="2.5" />
+            <circle cx="220" cy="130" r="2.5" />
+            <circle cx="240" cy="125" r="2.5" />
+            <circle cx="160" cy="170" r="2.5" />
+            <circle cx="180" cy="165" r="2.5" />
+            <circle cx="200" cy="160" r="2.5" />
+            <circle cx="220" cy="155" r="2.5" />
+            <circle cx="240" cy="150" r="2.5" />
+            <circle cx="180" cy="190" r="2.5" />
+            <circle cx="200" cy="185" r="2.5" />
+            <circle cx="220" cy="180" r="2.5" />
+            {/* Europe & Global Dotted Cluster */}
+            <circle cx="380" cy="80" r="2.5" />
+            <circle cx="400" cy="75" r="2.5" />
+            <circle cx="420" cy="70" r="2.5" />
+            <circle cx="440" cy="75" r="2.5" />
+            <circle cx="390" cy="100" r="2.5" />
+            <circle cx="410" cy="95" r="2.5" />
+            <circle cx="430" cy="90" r="2.5" />
+            <circle cx="450" cy="85" r="2.5" />
+            <circle cx="470" cy="90" r="2.5" />
+            <circle cx="400" cy="120" r="2.5" />
+            <circle cx="420" cy="115" r="2.5" />
+            <circle cx="440" cy="110" r="2.5" />
+            <circle cx="460" cy="105" r="2.5" />
+            <circle cx="480" cy="100" r="2.5" />
+            <circle cx="500" cy="95" r="2.5" />
+            <circle cx="420" cy="140" r="2.5" />
+            <circle cx="440" cy="135" r="2.5" />
+            <circle cx="460" cy="130" r="2.5" />
+            <circle cx="480" cy="125" r="2.5" />
+            <circle cx="500" cy="120" r="2.5" />
+            <circle cx="520" cy="115" r="2.5" />
+            <circle cx="540" cy="110" r="2.5" />
+            <circle cx="460" cy="155" r="2.5" />
+            <circle cx="480" cy="150" r="2.5" />
+            <circle cx="500" cy="145" r="2.5" />
+            <circle cx="520" cy="140" r="2.5" />
+            <circle cx="540" cy="135" r="2.5" />
+            <circle cx="560" cy="130" r="2.5" />
+            <circle cx="500" cy="170" r="2.5" />
+            <circle cx="520" cy="165" r="2.5" />
+            <circle cx="540" cy="160" r="2.5" />
+            <circle cx="560" cy="155" r="2.5" />
+            <circle cx="580" cy="150" r="2.5" />
+            <circle cx="520" cy="190" r="2.5" />
+            <circle cx="540" cy="185" r="2.5" />
+            <circle cx="560" cy="180" r="2.5" />
+            <circle cx="580" cy="175" r="2.5" />
+            <circle cx="600" cy="170" r="2.5" />
+          </g>
+        </svg>
       </div>
 
-      {/* Infinite Horizontal Loop Canvas Scroll */}
-      <div
-        className="relative mt-12 overflow-hidden"
-        style={{
-          maskImage:
-            "linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%)",
-          WebkitMaskImage:
-            "linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%)",
-        }}
-      >
+      <div className="shell relative z-10">
+        {/* Header Section */}
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between mb-10 sm:mb-12">
+          <div className="max-w-2xl">
+            <p className="text-[#dc2626] font-bold text-xs tracking-[0.18em] uppercase mb-2 sm:mb-2.5">
+              INDUSTRIES & ROLES
+            </p>
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-[46px] font-bold text-slate-900 tracking-tight leading-[1.12]">
+              Industries & Roles <br />
+              <span className="text-[#dc2626]">We Hire For</span>
+            </h2>
+            <p className="mt-3.5 text-sm sm:text-base text-slate-600 font-normal leading-relaxed max-w-xl">
+              Explore the specialized technical, executive, and operational positions we recruit across Canada and North America.
+            </p>
+          </div>
+
+          {/* Controls & Pagination Bars */}
+          <div className="flex flex-col items-start sm:items-end gap-3 shrink-0">
+            <div className="flex items-center gap-2.5">
+              <button
+                type="button"
+                onClick={() => scrollNav("left")}
+                aria-label="Scroll left"
+                className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-xs transition-all duration-200 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 active:scale-95 cursor-pointer"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollNav("right")}
+                aria-label="Scroll right"
+                className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-xs transition-all duration-200 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 active:scale-95 cursor-pointer"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+
+            {/* Pagination Dash Indicators */}
+            <div className="flex items-center gap-1.5 pt-1">
+              {[0, 1, 2].map((idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => goToPage(idx)}
+                  aria-label={`Go to slide page ${idx + 1}`}
+                  className={cn(
+                    "h-1 rounded-full transition-all duration-300 cursor-pointer",
+                    activePageIndex === idx
+                      ? "w-7 bg-[#dc2626]"
+                      : "w-7 bg-slate-200 hover:bg-slate-300"
+                  )}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Carousel Container */}
         <div
           ref={containerRef}
+          onScroll={handleScroll}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
           onPointerLeave={handlePointerUp}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => {
-            setIsHovered(false);
-            handlePointerUp();
-          }}
           className={cn(
-            "no-scrollbar flex gap-6 overflow-x-auto select-none py-6 px-6 touch-pan-y",
-            isDragging ? "cursor-grabbing" : "cursor-grab",
+            "no-scrollbar flex gap-4 sm:gap-5 overflow-x-auto select-none py-2 pb-4 touch-pan-y scroll-smooth",
+            isDragging ? "cursor-grabbing" : "cursor-grab"
           )}
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          <div className="flex gap-6 shrink-0">
-            {INDUSTRIES.map((ind, i) => {
-              const { icon: IndIcon } = ind;
-              return (
-                <div
-                  key={`${ind.name}-${i}`}
-                  className="group relative flex w-[350px] sm:w-[390px] shrink-0 flex-col overflow-hidden rounded-3xl border border-ink-line bg-ink-soft/40 backdrop-blur-xl transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-2 hover:border-brand/60 hover:shadow-[0_20px_50px_-15px_rgba(239,68,68,0.35)]"
-                >
-                  {/* Card Background Image Header */}
-                  <div className="relative h-44 w-full overflow-hidden">
-                    <img
-                      src={ind.image}
-                      alt={ind.name}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                    />
-                    <div
-                      className="absolute inset-0 bg-gradient-to-t from-ink via-ink/60 to-transparent opacity-90"
-                      aria-hidden
-                    />
+          {INDUSTRIES.map((ind) => {
+            const { icon: IndIcon } = ind;
+            return (
+              <div
+                key={ind.id}
+                className="group relative flex w-[280px] sm:w-[305px] md:w-[315px] shrink-0 flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl"
+              >
+                {/* Image Header with Number Badge */}
+                <div className="relative h-44 sm:h-48 w-full overflow-hidden bg-slate-100">
+                  <img
+                    src={ind.image}
+                    alt={ind.title}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <span className="absolute top-3 right-3 rounded-full bg-slate-900/80 backdrop-blur-md px-2.5 py-0.5 text-[11px] font-mono font-bold text-white/95 shadow-xs">
+                    {ind.id}
+                  </span>
+                </div>
 
-                    <span className="absolute top-4 right-4 rounded-full border border-white/20 bg-black/60 px-3 py-1 text-[11px] font-mono font-semibold text-white/90 backdrop-blur-md">
-                      {ind.id}
-                    </span>
+                {/* Overlapping Floating Circle Icon Badge */}
+                <div className="-mt-5 ml-4 relative z-10 flex h-10 w-10 items-center justify-center rounded-full border border-rose-100 bg-white text-[#dc2626] shadow-sm">
+                  <IndIcon className="h-4 w-4" />
+                </div>
+
+                {/* Card Body */}
+                <div className="flex flex-1 flex-col px-5 pt-2.5 pb-5 space-y-3">
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">
+                      {ind.category}
+                    </p>
+                    <h3 className="font-serif text-lg font-bold text-slate-900 transition-colors duration-200 group-hover:text-[#dc2626] leading-snug">
+                      {ind.title}
+                    </h3>
                   </div>
 
-                  {/* Card Body */}
-                  <div className="flex flex-1 flex-col p-6 space-y-4">
-                    <div className="flex items-center gap-2 text-brand font-bold text-xs uppercase tracking-wider">
-                      <IndIcon className="h-4 w-4 shrink-0" /> Industry {ind.id}
-                    </div>
+                  <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
+                    {ind.copy}
+                  </p>
 
-                    <h3 className="text-xl font-bold text-ink-foreground transition-colors duration-300 group-hover:text-brand">
-                      {ind.name}
-                    </h3>
-
-                    <p className="text-xs leading-relaxed text-ink-foreground/75">
-                      {ind.copy}
+                  {/* Roles We Hire For */}
+                  <div className="pt-1">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-[#dc2626] mb-2">
+                      ROLES WE HIRE FOR:
                     </p>
-
-                    {/* Roles We Hire For List */}
-                    <div className="pt-2">
-                      <p className="text-[11px] font-bold uppercase tracking-wider text-brand mb-2">
-                        Roles We Hire For:
-                      </p>
-                      <div className="flex flex-wrap gap-1.5 max-h-36 overflow-y-auto no-scrollbar pr-1">
-                        {ind.roles.map((role) => (
-                          <span
-                            key={role}
-                            className="inline-flex items-center gap-1 rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-medium text-white/90 transition-colors group-hover:border-white/20 group-hover:bg-white/10"
-                          >
-                            <CheckCircle2 className="h-3 w-3 text-brand shrink-0" />
-                            {role}
-                          </span>
-                        ))}
-                      </div>
+                    <div className="flex flex-wrap gap-1.5 min-h-[58px]">
+                      {ind.roles.map((role) => (
+                        <span
+                          key={role}
+                          className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-medium text-slate-700 transition-colors group-hover:bg-slate-200/70"
+                        >
+                          {role}
+                        </span>
+                      ))}
                     </div>
+                  </div>
 
-                    {/* CTA Link */}
-                    <div className="pt-4 mt-auto border-t border-white/10">
-                      <a
-                        href={ind.slug ? `/industries/${ind.slug}` : "/industries"}
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-white group-hover:text-brand transition-colors"
-                      >
-                        Explore {ind.name} Practice →
-                      </a>
-                    </div>
+                  {/* Bottom Link */}
+                  <div className="pt-3.5 mt-auto border-t border-slate-100">
+                    <a
+                      href={ind.slug ? `/industries/${ind.slug}` : "/industries"}
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-900 transition-colors group-hover:text-[#dc2626]"
+                    >
+                      <span>{ind.ctaText}</span>
+                      <span className="text-[#dc2626] font-bold text-sm transition-transform duration-200 group-hover:translate-x-1">
+                        →
+                      </span>
+                    </a>
                   </div>
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Bottom Feature Strip (Diverse Industries, Vetted & Verified, Future-Ready, North America Focus) */}
+        <div className="mt-10 sm:mt-12 rounded-2xl border border-slate-200/90 bg-white p-5 sm:p-6 shadow-xs grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-0 lg:divide-x lg:divide-slate-100">
+          {BOTTOM_HIGHLIGHTS.map((item) => {
+            const { icon: FeatureIcon } = item;
+            return (
+              <div
+                key={item.title}
+                className="flex items-center gap-3.5 lg:px-5 first:pl-0 last:pr-0"
+              >
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-rose-100 bg-rose-50 text-[#dc2626]">
+                  <FeatureIcon className="h-4 w-4" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-slate-900 leading-tight">
+                    {item.title}
+                  </h4>
+                  <p className="text-xs text-slate-500 font-normal mt-0.5 leading-snug">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

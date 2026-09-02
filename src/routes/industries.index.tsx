@@ -21,11 +21,11 @@ import {
 import { INDUSTRIES_DATA, type IndustryDetail } from "@/lib/industries-store";
 import { SiteNav } from "@/components/site/SiteNav";
 import { SiteFooter } from "@/components/site/SiteFooter";
-import servicesHero from "@/assets/services-hero.jpg";
+import { Industries } from "@/components/site/Sections";
 
-const TITLE = "Industry Specific Recruitment Practices | Venus Hiring";
+const TITLE = "Industries & Roles We Hire For | Venus Consultancy";
 const DESCRIPTION =
-  "Specialized recruitment practices tailored to Technology, Automotive & EV, Aerospace, Advanced Manufacturing, Healthcare, Finance, and Supply Chain across Canada and the US.";
+  "Explore the specialized technical, executive, and operational positions we recruit across Canada and North America.";
 
 export const Route = createFileRoute("/industries/")({
   head: () => ({
@@ -40,67 +40,16 @@ export const Route = createFileRoute("/industries/")({
   component: IndustriesIndexPage,
 });
 
-const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
-  Building2,
-  Cpu,
-  Car,
-  Plane,
-  ShieldAlert,
-  Zap,
-  DollarSign,
-  Truck,
-  Layers,
-  Award,
-};
-
 function IndustriesIndexPage() {
   const industriesList = Object.values(INDUSTRIES_DATA);
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans flex flex-col justify-between selection:bg-brand selection:text-white">
+    <div className="min-h-screen bg-white text-slate-900 font-sans flex flex-col justify-between selection:bg-brand selection:text-white">
       <SiteNav />
 
-      <main id="main-content" className="flex-1">
-        {/* ── HERO ── */}
-        <section className="relative isolate overflow-hidden min-h-screen lg:min-h-[100svh] flex flex-col justify-center bg-slate-950 text-white pt-28 sm:pt-32 pb-16 border-b border-slate-800">
-          {/* Background Image with Softened Black Overlay */}
-          <div className="absolute inset-0 -z-10 overflow-hidden">
-            <img
-              src={servicesHero}
-              alt="Industry Specific Recruitment"
-              className="h-full w-full object-cover object-center filter brightness-[0.65] contrast-105 scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/60 to-slate-950/30" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand/15 via-transparent to-transparent" />
-          </div>
-
-          <div className="shell relative z-10 my-auto">
-            {/* Breadcrumb */}
-            <div className="flex items-center gap-2 text-xs font-bold text-slate-300 mb-6 uppercase tracking-wider">
-              <Link to="/" className="hover:text-white transition-colors">
-                Home
-              </Link>
-              <ChevronRight className="h-3.5 w-3.5 text-slate-500" />
-              <span className="text-brand font-black">Industries</span>
-            </div>
-
-            <div className="max-w-3xl space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-brand/40 bg-brand/15 px-4 py-1.5 text-xs font-extrabold uppercase tracking-widest text-brand backdrop-blur-md">
-                <Sparkles className="h-3.5 w-3.5" />
-                <span>SECTOR SPECIALIZATION</span>
-              </div>
-
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.08]">
-                Industry-Wise Recruitment Practices.
-              </h1>
-
-              <p className="text-base sm:text-xl text-slate-200 font-medium leading-relaxed max-w-2xl">
-                Domain-deep headhunting and technical screening engineered around the unique regulatory, technical, and talent dynamics of your sector.
-              </p>
-
-            </div>
-          </div>
-        </section>
+      <main id="main-content" className="flex-1 pt-20 sm:pt-24">
+        {/* ── MAIN REDESIGNED INDUSTRIES & ROLES SHOWCASE SECTION ── */}
+        <Industries />
 
         {/* ── INDUSTRIES CARDS GRID ── */}
         <section className="py-16 sm:py-24">
