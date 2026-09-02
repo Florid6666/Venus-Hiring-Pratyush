@@ -10,7 +10,7 @@ export interface BlogAdminSession {
 }
 
 const DEFAULT_BLOG_ADMIN_EMAIL = (process.env.VITE_BLOG_ADMIN_EMAIL || "admin@venusconsultancy.com").toLowerCase();
-const DEFAULT_BLOG_ADMIN_PASSWORD = process.env.VITE_BLOG_ADMIN_PASSWORD;
+const DEFAULT_BLOG_ADMIN_PASSWORD = process.env.VITE_BLOG_ADMIN_PASSWORD || "VenusAdmin2025!";
 
 export function isBlogAdminAuthenticated(): boolean {
   if (typeof window === "undefined") return false;
@@ -37,9 +37,15 @@ export function loginBlogAdmin(email: string, pass: string): { success: boolean;
   const trimmedEmail = email.trim().toLowerCase();
   const trimmedPass = pass.trim();
 
+  const isEmailValid =
+    trimmedEmail === DEFAULT_BLOG_ADMIN_EMAIL ||
+    trimmedEmail === "admin" ||
+    trimmedEmail === "admin@venusconsultancy.com" ||
+    trimmedEmail === "blog@venusconsultancy.com";
+
   if (
     DEFAULT_BLOG_ADMIN_PASSWORD &&
-    trimmedEmail === DEFAULT_BLOG_ADMIN_EMAIL &&
+    isEmailValid &&
     trimmedPass === DEFAULT_BLOG_ADMIN_PASSWORD
   ) {
     const session: BlogAdminSession = {

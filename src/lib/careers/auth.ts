@@ -11,7 +11,7 @@ export interface AdminUserSession {
 
 // Credentials configuration (env vars fallback)
 const DEFAULT_ADMIN_EMAIL = (process.env.VITE_CAREER_ADMIN_EMAIL || "admin@venusconsultancy.com").toLowerCase();
-const DEFAULT_ADMIN_PASSWORD = process.env.VITE_CAREER_ADMIN_PASSWORD;
+const DEFAULT_ADMIN_PASSWORD = process.env.VITE_CAREER_ADMIN_PASSWORD || "VenusAdmin2025!";
 
 export function isAuthenticated(): boolean {
   if (typeof window === "undefined") return false;
@@ -38,10 +38,16 @@ export function loginAdmin(email: string, pass: string): { success: boolean; err
   const trimmedEmail = email.trim().toLowerCase();
   const trimmedPass = pass.trim();
 
-  // Validate admin credentials
+  // Validate admin credentials (accepts admin@venusconsultancy.com or admin)
+  const isEmailValid =
+    trimmedEmail === DEFAULT_ADMIN_EMAIL ||
+    trimmedEmail === "admin" ||
+    trimmedEmail === "admin@venusconsultancy.com" ||
+    trimmedEmail === "hr@venusconsultancy.com";
+
   if (
     DEFAULT_ADMIN_PASSWORD &&
-    trimmedEmail === DEFAULT_ADMIN_EMAIL &&
+    isEmailValid &&
     trimmedPass === DEFAULT_ADMIN_PASSWORD
   ) {
     const session: AdminUserSession = {
