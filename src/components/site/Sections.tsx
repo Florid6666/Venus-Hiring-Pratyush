@@ -1000,18 +1000,12 @@ export function Industries() {
     if (!containerRef.current) return;
     const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
     const maxScroll = scrollWidth - clientWidth;
-    if (maxScroll <= 0) {
+    if (maxScroll <= 10) {
       setActivePageIndex(0);
       return;
     }
-    const ratio = scrollLeft / maxScroll;
-    if (ratio < 0.3) {
-      setActivePageIndex(0);
-    } else if (ratio < 0.7) {
-      setActivePageIndex(1);
-    } else {
-      setActivePageIndex(2);
-    }
+    const page = Math.round(scrollLeft / (clientWidth + 16));
+    setActivePageIndex(Math.min(Math.max(0, page), 2));
   };
 
   const handleScroll = () => {
@@ -1040,11 +1034,15 @@ export function Industries() {
 
   const scrollNav = (direction: "left" | "right") => {
     if (!containerRef.current) return;
-    const scrollAmount = Math.max(containerRef.current.clientWidth * 0.75, 340);
-    const current = containerRef.current.scrollLeft;
-    const target = direction === "left" ? current - scrollAmount : current + scrollAmount;
+    const container = containerRef.current;
+    const scrollAmount = container.clientWidth + 16;
+    const current = container.scrollLeft;
+    const target =
+      direction === "left"
+        ? Math.max(0, current - scrollAmount)
+        : Math.min(container.scrollWidth - container.clientWidth, current + scrollAmount);
 
-    containerRef.current.scrollTo({
+    container.scrollTo({
       left: target,
       behavior: "smooth",
     });
@@ -1052,10 +1050,9 @@ export function Industries() {
 
   const goToPage = (pageIdx: number) => {
     if (!containerRef.current) return;
-    const { scrollWidth, clientWidth } = containerRef.current;
-    const maxScroll = scrollWidth - clientWidth;
-    const target = (pageIdx / 2) * maxScroll;
-    containerRef.current.scrollTo({
+    const container = containerRef.current;
+    const target = pageIdx * (container.clientWidth + 16);
+    container.scrollTo({
       left: target,
       behavior: "smooth",
     });
@@ -1220,7 +1217,7 @@ export function Industries() {
           onPointerUp={handlePointerUp}
           onPointerLeave={handlePointerUp}
           className={cn(
-            "no-scrollbar flex gap-4 sm:gap-5 overflow-x-auto select-none py-2 pb-4 touch-pan-y scroll-smooth",
+            "no-scrollbar flex gap-4 overflow-x-auto select-none py-2 pb-4 touch-pan-y scroll-smooth snap-x snap-mandatory",
             isDragging ? "cursor-grabbing" : "cursor-grab"
           )}
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
@@ -1230,7 +1227,7 @@ export function Industries() {
             return (
               <div
                 key={ind.id}
-                className="group relative flex w-[280px] sm:w-[305px] md:w-[315px] shrink-0 flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl"
+                className="group relative flex w-full sm:w-[calc((100%-1rem)/2)] md:w-[calc((100%-2rem)/3)] lg:w-[calc((100%-3rem)/4)] xl:w-[calc((100%-4rem)/5)] shrink-0 snap-start snap-always flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl"
               >
                 {/* Image Header with Number Badge */}
                 <div className="relative h-44 sm:h-48 w-full overflow-hidden bg-slate-100">
