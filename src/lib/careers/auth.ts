@@ -5,7 +5,7 @@ const CAREER_ADMIN_AUTH_KEY = "venus_career_admin_auth_session";
 export interface AdminUserSession {
   email: string;
   name: string;
-  role: "Super Admin" | "HR Manager" | "Recruiter" | "Viewer";
+  role: "Super Admin" | "Recruiter";
   loggedInAt: string;
 }
 
@@ -38,11 +38,12 @@ export function loginAdmin(email: string, pass: string): { success: boolean; err
   const trimmedEmail = email.trim().toLowerCase();
   const trimmedPass = pass.trim();
 
-  // Validate admin credentials (accepts admin@venusconsultancy.com or admin)
+  // Validate admin credentials (accepts admin@venusconsultancy.com or admin or recruiter)
   const isEmailValid =
     trimmedEmail === DEFAULT_ADMIN_EMAIL ||
     trimmedEmail === "admin" ||
     trimmedEmail === "admin@venusconsultancy.com" ||
+    trimmedEmail === "recruiter@venusconsultancy.com" ||
     trimmedEmail === "hr@venusconsultancy.com";
 
   if (
@@ -52,8 +53,8 @@ export function loginAdmin(email: string, pass: string): { success: boolean; err
   ) {
     const session: AdminUserSession = {
       email: trimmedEmail.includes("@") ? trimmedEmail : "admin@venusconsultancy.com",
-      name: trimmedEmail === "admin" ? "Venus Super Admin" : "HR Recruitment Lead",
-      role: trimmedEmail === "hr@venusconsultancy.com" ? "HR Manager" : "Super Admin",
+      name: trimmedEmail === "recruiter@venusconsultancy.com" ? "Senior Recruiter" : "Venus Super Admin",
+      role: trimmedEmail === "recruiter@venusconsultancy.com" ? "Recruiter" : "Super Admin",
       loggedInAt: new Date().toISOString(),
     };
     if (typeof window !== "undefined") {

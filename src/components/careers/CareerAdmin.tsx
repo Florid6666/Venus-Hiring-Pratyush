@@ -65,7 +65,7 @@ export function CareerAdmin() {
     "jobs" | "applications" | "interviews" | "settings"
   >("jobs");
   const [userRole, setUserRole] = useState<
-    "Super Admin" | "HR Manager" | "Recruiter" | "Viewer"
+    "Super Admin" | "Recruiter"
   >("Super Admin");
 
   // Authentication State
@@ -525,7 +525,7 @@ export function CareerAdmin() {
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1.5">
             <span className="text-xs font-semibold text-muted-foreground hidden sm:inline">Role View:</span>
-            {(["Super Admin", "HR Manager", "Recruiter", "Viewer"] as const).map((role) => (
+            {(["Super Admin", "Recruiter"] as const).map((role) => (
               <button
                 key={role}
                 type="button"
