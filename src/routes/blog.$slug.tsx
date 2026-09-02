@@ -371,34 +371,32 @@ function BlogDetailPage() {
               aria-label="Breadcrumb navigation"
               className="flex items-center gap-2 text-xs font-medium text-muted-foreground overflow-x-auto scrollbar-none"
             >
-              <Link to="/" className="hover:text-brand transition-colors shrink-0">
+              <a href="/" className="hover:text-brand transition-colors shrink-0">
                 Home
-              </Link>
+              </a>
               <ChevronRight className="h-3.5 w-3.5 opacity-40 shrink-0" />
-              <Link to="/blog" className="hover:text-brand transition-colors shrink-0">
+              <a href="/blog" className="hover:text-brand transition-colors shrink-0">
                 Blogs
-              </Link>
+              </a>
               <ChevronRight className="h-3.5 w-3.5 opacity-40 shrink-0" />
-              <Link
-                to="/blog"
-                search={{ category: blog.category }}
+              <a
+                href={`/blog?category=${encodeURIComponent(blog.category || "All")}`}
                 className="text-brand font-semibold shrink-0 hover:underline"
               >
-                {blog.category}
-              </Link>
+                {blog.category || "General"}
+              </a>
               <ChevronRight className="h-3.5 w-3.5 opacity-40 shrink-0 hidden sm:inline" />
               <span className="text-foreground font-medium truncate max-w-[220px] sm:max-w-[340px] hidden sm:inline">
                 {blog.title}
               </span>
             </nav>
 
-            <button
-              type="button"
-              onClick={() => navigate({ to: "/blog" })}
+            <a
+              href="/blog"
               className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-1.5 text-xs font-bold text-foreground hover:bg-brand hover:text-white transition-all shadow-sm shrink-0"
             >
               <ArrowLeft className="h-4 w-4" /> Back to All Articles
-            </button>
+            </a>
           </div>
         </div>
 
@@ -410,13 +408,13 @@ function BlogDetailPage() {
               {/* Category Tag, Reading Time & Publication Date */}
               <div className="flex flex-wrap items-center gap-3">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-brand/10 border border-brand/30 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-brand">
-                  <Tag className="h-3.5 w-3.5" /> {blog.category}
+                  <Tag className="h-3.5 w-3.5" /> {blog.category || "General"}
                 </span>
                 <span className="inline-flex items-center gap-1 text-xs font-semibold text-muted-foreground">
                   <Clock className="h-3.5 w-3.5 text-brand" /> {readingTime}
                 </span>
                 <span className="inline-flex items-center gap-1 text-xs font-semibold text-muted-foreground">
-                  <Calendar className="h-3.5 w-3.5 text-muted-foreground" /> Published {blog.publishDate}
+                  <Calendar className="h-3.5 w-3.5 text-muted-foreground" /> Published {blog.publishDate || "Recently"}
                 </span>
               </div>
 
@@ -428,21 +426,26 @@ function BlogDetailPage() {
               </div>
 
               {/* Simple Short Description / Excerpt */}
-              <p className="text-base sm:text-lg leading-relaxed text-muted-foreground font-normal max-w-3xl border-l-2 border-brand/40 pl-3.5 py-0.5">
-                {blog.excerpt}
-              </p>
+              {blog.excerpt && (
+                <p className="text-base sm:text-lg leading-relaxed text-muted-foreground font-normal max-w-3xl border-l-2 border-brand/40 pl-3.5 py-0.5">
+                  {blog.excerpt}
+                </p>
+              )}
 
               {/* Author Info Bar & Share Toolbar Header */}
               <div className="flex flex-wrap items-center justify-between gap-6 py-5 border-y border-border/80">
                 <div className="flex items-center gap-3.5">
                   <img
-                    src={blog.author.avatar}
-                    alt={blog.author.name}
+                    src={
+                      blog.author?.avatar ||
+                      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop"
+                    }
+                    alt={blog.author?.name || "Venus Team"}
                     className="h-12 w-12 rounded-full object-cover border-2 border-brand/40 shadow-sm"
                   />
                   <div>
-                    <p className="text-sm font-bold text-foreground">{blog.author.name}</p>
-                    <p className="text-xs text-muted-foreground">{blog.author.role}</p>
+                    <p className="text-sm font-bold text-foreground">{blog.author?.name || "Venus Hiring Team"}</p>
+                    <p className="text-xs text-muted-foreground">{blog.author?.role || "Workforce Specialist"}</p>
                   </div>
                 </div>
 
