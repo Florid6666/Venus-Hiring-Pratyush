@@ -947,23 +947,13 @@ const INDUSTRIES = [
     image:
       "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=500&fit=crop&auto=format",
   },
-  {
-    id: "10",
-    slug: "manufacturing-supply-chain",
-    category: "MANUFACTURING & TRADES",
-    title: "Manufacturing & Trades",
-    copy: "Skilled trades professionals, millwrights, CNC programmers, and industrial plant operations leaders.",
-    roles: [
-      "Manufacturing Engineers",
-      "CNC Programmers",
-      "Industrial Millwrights",
-      "Plant Production Managers",
-    ],
-    ctaText: "Explore Manufacturing Roles",
-    icon: Factory,
-    image:
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=500&fit=crop&auto=format",
-  },
+];
+
+// 3 slides with 3 cards each (9 cards total)
+const INDUSTRY_SLIDES = [
+  INDUSTRIES.slice(0, 3), // [01, 02, 03]
+  INDUSTRIES.slice(3, 6), // [04, 05, 06]
+  INDUSTRIES.slice(6, 9), // [07, 08, 09]
 ];
 
 const BOTTOM_HIGHLIGHTS = [
@@ -990,73 +980,30 @@ const BOTTOM_HIGHLIGHTS = [
 ];
 
 export function Industries() {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeftState, setScrollLeftState] = useState(0);
   const [activePageIndex, setActivePageIndex] = useState(0);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
 
-  const updateActivePage = () => {
-    if (!containerRef.current) return;
-    const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
-    const maxScroll = scrollWidth - clientWidth;
-    if (maxScroll <= 10) {
-      setActivePageIndex(0);
-      return;
+  const prevSlide = () => {
+    setActivePageIndex((prev) => (prev > 0 ? prev - 1 : INDUSTRY_SLIDES.length - 1));
+  };
+
+  const nextSlide = () => {
+    setActivePageIndex((prev) => (prev < INDUSTRY_SLIDES.length - 1 ? prev + 1 : 0));
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null) return;
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (diff > 40) {
+      nextSlide();
+    } else if (diff < -40) {
+      prevSlide();
     }
-    const page = Math.round(scrollLeft / (clientWidth + 16));
-    setActivePageIndex(Math.min(Math.max(0, page), 2));
-  };
-
-  const handleScroll = () => {
-    updateActivePage();
-  };
-
-  const handlePointerDown = (e: React.PointerEvent) => {
-    if (!containerRef.current) return;
-    setIsDragging(true);
-    setStartX(e.clientX - containerRef.current.offsetLeft);
-    setScrollLeftState(containerRef.current.scrollLeft);
-  };
-
-  const handlePointerMove = (e: React.PointerEvent) => {
-    if (!isDragging || !containerRef.current) return;
-    e.preventDefault();
-    const x = e.clientX - containerRef.current.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    containerRef.current.scrollLeft = scrollLeftState - walk;
-    updateActivePage();
-  };
-
-  const handlePointerUp = () => {
-    setIsDragging(false);
-  };
-
-  const scrollNav = (direction: "left" | "right") => {
-    if (!containerRef.current) return;
-    const container = containerRef.current;
-    const scrollAmount = container.clientWidth + 16;
-    const current = container.scrollLeft;
-    const target =
-      direction === "left"
-        ? Math.max(0, current - scrollAmount)
-        : Math.min(container.scrollWidth - container.clientWidth, current + scrollAmount);
-
-    container.scrollTo({
-      left: target,
-      behavior: "smooth",
-    });
-  };
-
-  const goToPage = (pageIdx: number) => {
-    if (!containerRef.current) return;
-    const container = containerRef.current;
-    const target = pageIdx * (container.clientWidth + 16);
-    container.scrollTo({
-      left: target,
-      behavior: "smooth",
-    });
-    setActivePageIndex(pageIdx);
+    setTouchStartX(null);
   };
 
   return (
@@ -1172,16 +1119,16 @@ export function Industries() {
             <div className="flex items-center gap-2.5">
               <button
                 type="button"
-                onClick={() => scrollNav("left")}
-                aria-label="Scroll left"
+                onClick={prevSlide}
+                aria-label="Previous 3 industries"
                 className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-xs transition-all duration-200 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 active:scale-95 cursor-pointer"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
               <button
                 type="button"
-                onClick={() => scrollNav("right")}
-                aria-label="Scroll right"
+                onClick={nextSlide}
+                aria-label="Next 3 industries"
                 className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-xs transition-all duration-200 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 active:scale-95 cursor-pointer"
               >
                 <ChevronRight className="h-4 w-4" />
@@ -1194,13 +1141,13 @@ export function Industries() {
                 <button
                   key={idx}
                   type="button"
-                  onClick={() => goToPage(idx)}
-                  aria-label={`Go to slide page ${idx + 1}`}
+                  onClick={() => setActivePageIndex(idx)}
+                  aria-label={`Go to slide ${idx + 1}`}
                   className={cn(
                     "h-1 rounded-full transition-all duration-300 cursor-pointer",
                     activePageIndex === idx
-                      ? "w-7 bg-[#dc2626]"
-                      : "w-7 bg-slate-200 hover:bg-slate-300"
+                      ? "w-8 bg-[#dc2626]"
+                      : "w-8 bg-slate-200 hover:bg-slate-300"
                   )}
                 />
               ))}
@@ -1208,93 +1155,97 @@ export function Industries() {
           </div>
         </div>
 
-        {/* Carousel Container */}
+        {/* 3-Cards Per Slide Smooth Transition Container */}
         <div
-          ref={containerRef}
-          onScroll={handleScroll}
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={handlePointerUp}
-          onPointerLeave={handlePointerUp}
-          className={cn(
-            "no-scrollbar flex gap-4 overflow-x-auto select-none py-2 pb-4 touch-pan-y scroll-smooth snap-x snap-mandatory",
-            isDragging ? "cursor-grabbing" : "cursor-grab"
-          )}
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          className="relative overflow-hidden w-full py-2"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
-          {INDUSTRIES.map((ind) => {
-            const { icon: IndIcon } = ind;
-            return (
+          <div
+            className="flex transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]"
+            style={{ transform: `translateX(-${activePageIndex * 100}%)` }}
+          >
+            {INDUSTRY_SLIDES.map((slideCards, slideIdx) => (
               <div
-                key={ind.id}
-                className="group relative flex w-full sm:w-[calc((100%-1rem)/2)] md:w-[calc((100%-2rem)/3)] lg:w-[calc((100%-3rem)/4)] xl:w-[calc((100%-4rem)/5)] shrink-0 snap-start snap-always flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl"
+                key={slideIdx}
+                className="w-full shrink-0 grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6 px-0.5"
               >
-                {/* Image Header with Number Badge */}
-                <div className="relative h-44 sm:h-48 w-full overflow-hidden bg-slate-100">
-                  <img
-                    src={ind.image}
-                    alt={ind.title}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  />
-                  <span className="absolute top-3 right-3 rounded-full bg-slate-900/80 backdrop-blur-md px-2.5 py-0.5 text-[11px] font-mono font-bold text-white/95 shadow-xs">
-                    {ind.id}
-                  </span>
-                </div>
-
-                {/* Overlapping Floating Circle Icon Badge */}
-                <div className="-mt-5 ml-4 relative z-10 flex h-10 w-10 items-center justify-center rounded-full border border-rose-100 bg-white text-[#dc2626] shadow-sm">
-                  <IndIcon className="h-4 w-4" />
-                </div>
-
-                {/* Card Body */}
-                <div className="flex flex-1 flex-col px-5 pt-2.5 pb-5 space-y-3">
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">
-                      {ind.category}
-                    </p>
-                    <h3 className="font-serif text-lg font-bold text-slate-900 transition-colors duration-200 group-hover:text-[#dc2626] leading-snug">
-                      {ind.title}
-                    </h3>
-                  </div>
-
-                  <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
-                    {ind.copy}
-                  </p>
-
-                  {/* Roles We Hire For */}
-                  <div className="pt-1">
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-[#dc2626] mb-2">
-                      ROLES WE HIRE FOR:
-                    </p>
-                    <div className="flex flex-wrap gap-1.5 min-h-[58px]">
-                      {ind.roles.map((role) => (
-                        <span
-                          key={role}
-                          className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-medium text-slate-700 transition-colors group-hover:bg-slate-200/70"
-                        >
-                          {role}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Bottom Link */}
-                  <div className="pt-3.5 mt-auto border-t border-slate-100">
-                    <a
-                      href={ind.slug ? `/industries/${ind.slug}` : "/industries"}
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-900 transition-colors group-hover:text-[#dc2626]"
+                {slideCards.map((ind) => {
+                  const { icon: IndIcon } = ind;
+                  return (
+                    <div
+                      key={ind.id}
+                      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl"
                     >
-                      <span>{ind.ctaText}</span>
-                      <span className="text-[#dc2626] font-bold text-sm transition-transform duration-200 group-hover:translate-x-1">
-                        →
-                      </span>
-                    </a>
-                  </div>
-                </div>
+                      {/* Image Header with Number Badge */}
+                      <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-slate-100">
+                        <img
+                          src={ind.image}
+                          alt={ind.title}
+                          loading="lazy"
+                          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        />
+                        <span className="absolute top-3 right-3 rounded-full bg-slate-900/80 backdrop-blur-md px-2.5 py-0.5 text-[11px] font-mono font-bold text-white/95 shadow-xs">
+                          {ind.id}
+                        </span>
+                      </div>
+
+                      {/* Overlapping Floating Circle Icon Badge */}
+                      <div className="-mt-5 ml-4 relative z-10 flex h-10 w-10 items-center justify-center rounded-full border border-rose-100 bg-white text-[#dc2626] shadow-sm">
+                        <IndIcon className="h-4 w-4" />
+                      </div>
+
+                      {/* Card Body */}
+                      <div className="flex flex-1 flex-col px-5 pt-2.5 pb-5 space-y-3">
+                        <div>
+                          <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1">
+                            {ind.category}
+                          </p>
+                          <h3 className="font-serif text-lg font-bold text-slate-900 transition-colors duration-200 group-hover:text-[#dc2626] leading-snug">
+                            {ind.title}
+                          </h3>
+                        </div>
+
+                        <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
+                          {ind.copy}
+                        </p>
+
+                        {/* Roles We Hire For */}
+                        <div className="pt-1">
+                          <p className="text-[10px] font-bold uppercase tracking-wider text-[#dc2626] mb-2">
+                            ROLES WE HIRE FOR:
+                          </p>
+                          <div className="flex flex-wrap gap-1.5 min-h-[58px]">
+                            {ind.roles.map((role) => (
+                              <span
+                                key={role}
+                                className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-medium text-slate-700 transition-colors group-hover:bg-slate-200/70"
+                              >
+                                {role}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Bottom Link */}
+                        <div className="pt-3.5 mt-auto border-t border-slate-100">
+                          <a
+                            href={ind.slug ? `/industries/${ind.slug}` : "/industries"}
+                            className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-900 transition-colors group-hover:text-[#dc2626]"
+                          >
+                            <span>{ind.ctaText}</span>
+                            <span className="text-[#dc2626] font-bold text-sm transition-transform duration-200 group-hover:translate-x-1">
+                              →
+                            </span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
 
         {/* Bottom Feature Strip (Diverse Industries, Vetted & Verified, Future-Ready, North America Focus) */}
