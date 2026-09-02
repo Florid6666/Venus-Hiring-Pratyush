@@ -214,7 +214,7 @@ function BlogDetailPage() {
               The recruitment article you are looking for does not exist or may have been updated.
             </p>
             <Link
-              to="/"
+              to="/blog"
               className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-xs font-bold text-white shadow-brand hover:brightness-110 transition-all"
             >
               <ArrowLeft className="h-4 w-4" /> Explore All Articles
@@ -270,7 +270,7 @@ function BlogDetailPage() {
         "@type": "ListItem",
         position: 2,
         name: "Blogs",
-        item: "https://venus-hiring.vercel.app/#blog",
+        item: "https://venus-hiring.vercel.app/blog",
       },
       {
         "@type": "ListItem",
@@ -286,12 +286,12 @@ function BlogDetailPage() {
       ? {
           "@context": "https://schema.org",
           "@type": "FAQPage",
-          mainEntity: blog.faqs.map((f) => ({
+          mainEntity: blog.faqs.map((faq) => ({
             "@type": "Question",
-            name: f.q,
+            name: faq.question,
             acceptedAnswer: {
               "@type": "Answer",
-              text: f.a,
+              text: faq.answer,
             },
           })),
         }
@@ -354,11 +354,17 @@ function BlogDetailPage() {
                 Home
               </Link>
               <ChevronRight className="h-3.5 w-3.5 opacity-40 shrink-0" />
-              <Link to="/" className="hover:text-brand transition-colors shrink-0">
+              <Link to="/blog" className="hover:text-brand transition-colors shrink-0">
                 Blogs
               </Link>
               <ChevronRight className="h-3.5 w-3.5 opacity-40 shrink-0" />
-              <span className="text-brand font-semibold shrink-0">{blog.category}</span>
+              <Link
+                to="/blog"
+                search={{ category: blog.category }}
+                className="text-brand font-semibold shrink-0 hover:underline"
+              >
+                {blog.category}
+              </Link>
               <ChevronRight className="h-3.5 w-3.5 opacity-40 shrink-0 hidden sm:inline" />
               <span className="text-foreground font-medium truncate max-w-[220px] sm:max-w-[340px] hidden sm:inline">
                 {blog.title}
@@ -367,7 +373,7 @@ function BlogDetailPage() {
 
             <button
               type="button"
-              onClick={() => navigate({ to: "/" })}
+              onClick={() => navigate({ to: "/blog" })}
               className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-1.5 text-xs font-bold text-foreground hover:bg-brand hover:text-white transition-all shadow-sm shrink-0"
             >
               <ArrowLeft className="h-4 w-4" /> Back to All Articles
@@ -811,7 +817,7 @@ function BlogDetailPage() {
                     </p>
                   </div>
                   <Link
-                    to="/"
+                    to="/blog"
                     className="inline-flex items-center gap-1 text-xs font-bold text-brand hover:underline"
                   >
                     View All →
