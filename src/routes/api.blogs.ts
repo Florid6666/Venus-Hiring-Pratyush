@@ -88,6 +88,7 @@ export const Route = createFileRoute("/api/blogs")({
           return new Response(
             JSON.stringify({
               success: true,
+              isFallback: true,
               blogs: INITIAL_BLOGS,
               categories: INITIAL_CATEGORIES,
             }),

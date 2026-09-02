@@ -741,27 +741,22 @@ export function getAdjacentArticles(currentBlog: BlogPost, allBlogs: BlogPost[])
   return { prevBlog, nextBlog };
 }
 
-const STORAGE_KEY_BLOGS = "venus_blogs_data_v20";
-const STORAGE_KEY_CATS = "venus_blogs_categories_v20";
+const STORAGE_KEY_BLOGS = "venus_blogs_data_v21";
+const STORAGE_KEY_CATS = "venus_blogs_categories_v21";
 
 export function getStoredBlogs(): BlogPost[] {
   if (typeof window === "undefined") return INITIAL_BLOGS;
   try {
-    // Clear legacy keys if present
-    for (let i = 1; i <= 15; i++) {
-      localStorage.removeItem(`venus_blogs_data_v${i}`);
-    }
-
     const raw = localStorage.getItem(STORAGE_KEY_BLOGS);
-    if (
-      !raw ||
-      !raw.includes("Understanding US-Canada Remote Hiring") ||
-      raw.includes("Cross-Border Hiring Made Simple")
-    ) {
+    if (!raw) {
       localStorage.setItem(STORAGE_KEY_BLOGS, JSON.stringify(INITIAL_BLOGS));
       return INITIAL_BLOGS;
     }
-    return JSON.parse(raw);
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed) && parsed.length > 0) {
+      return parsed;
+    }
+    return INITIAL_BLOGS;
   } catch {
     return INITIAL_BLOGS;
   }
@@ -784,7 +779,11 @@ export function getStoredCategories(): string[] {
       localStorage.setItem(STORAGE_KEY_CATS, JSON.stringify(INITIAL_CATEGORIES));
       return INITIAL_CATEGORIES;
     }
-    return JSON.parse(raw);
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed) && parsed.length > 0) {
+      return parsed;
+    }
+    return INITIAL_CATEGORIES;
   } catch {
     return INITIAL_CATEGORIES;
   }
@@ -800,12 +799,12 @@ export function saveStoredCategories(categories: string[]) {
 }
 
 export function useBlogs() {
-  const [blogs, setBlogs] = useState<BlogPost[]>(INITIAL_BLOGS);
-  const [categories, setCategories] = useState<string[]>(INITIAL_CATEGORIES);
+  const [blogs, setBlogs] = useState<BlogPost[]>(() => getStoredBlogs());
+  const [categories, setCategories] = useState<string[]>(() => getStoredCategories());
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Sync local storage on client mount to prevent SSR hydration mismatch
+    // Sync local storage on client mount
     setBlogs(getStoredBlogs());
     setCategories(getStoredCategories());
 
@@ -815,19 +814,12 @@ export function useBlogs() {
         const res = await fetch("/api/blogs");
         if (res.ok) {
           const data = await res.json();
-          if (data.success && Array.isArray(data.blogs) && data.blogs.length > 0) {
-            const cleanBlogs = data.blogs.filter(
-              (b: BlogPost) =>
-                b.content &&
-                !b.content.includes("Cross-Border Hiring Made Simple") &&
-                !b.excerpt?.includes("A practical guide for US companies hiring Canadian software engineers")
-            );
-            if (cleanBlogs.length > 0) {
-              setBlogs(cleanBlogs);
-              saveStoredBlogs(cleanBlogs);
-            }
+          // Only update if actual database records were returned and not static fallback
+          if (data.success && Array.isArray(data.blogs) && data.blogs.length > 0 && !data.isFallback) {
+            setBlogs(data.blogs);
+            saveStoredBlogs(data.blogs);
           }
-          if (data.success && Array.isArray(data.categories) && data.categories.length > 0) {
+          if (data.success && Array.isArray(data.categories) && data.categories.length > 0 && !data.isFallback) {
             setCategories(data.categories);
             saveStoredCategories(data.categories);
           }

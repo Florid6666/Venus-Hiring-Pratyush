@@ -77,7 +77,17 @@ function BlogDetailPage() {
     if (!b) return false;
     const s = (b.slug || "").toLowerCase().trim();
     const id = (b.id || "").toLowerCase().trim();
-    return s === decodedSlug || id === decodedSlug || b.slug === slug || b.id === slug;
+    const titleSlug = (b.title || "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)+/g, "");
+    return (
+      s === decodedSlug ||
+      id === decodedSlug ||
+      titleSlug === decodedSlug ||
+      b.slug === slug ||
+      b.id === slug
+    );
   });
 
   // Compute Related Articles & Adjacent Previous/Next Posts
