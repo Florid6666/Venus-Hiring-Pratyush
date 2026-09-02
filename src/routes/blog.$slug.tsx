@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import {
   ArrowLeft,
@@ -31,6 +31,7 @@ import {
   calculateReadingTime,
   getRelatedArticles,
   getAdjacentArticles,
+  getStoredBlogs,
   DEFAULT_FALLBACK_IMAGE,
 } from "@/lib/blog-store";
 import { SiteNav } from "@/components/site/SiteNav";
@@ -61,6 +62,7 @@ function BlogDetailPage() {
   const { slug } = Route.useParams();
   const navigate = useNavigate();
   const { blogs, loading } = useBlogs();
+  const [mounted, setMounted] = useState(false);
 
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
   const [copied, setCopied] = useState(false);
@@ -71,9 +73,30 @@ function BlogDetailPage() {
 
   const articleContentRef = useRef<HTMLDivElement | null>(null);
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Merge state blogs with direct localStorage cache so updates appear instantly across tabs
+  const allCandidateBlogs = useMemo(() => {
+    const list = [...blogs];
+    if (typeof window !== "undefined") {
+      const stored = getStoredBlogs();
+      stored.forEach((sb) => {
+        const idx = list.findIndex((b) => b.id === sb.id);
+        if (idx !== -1) {
+          list[idx] = sb;
+        } else {
+          list.push(sb);
+        }
+      });
+    }
+    return list;
+  }, [blogs, mounted]);
+
   // Find matching blog by slug or ID (case-insensitive & URL-decoded)
   const decodedSlug = decodeURIComponent(slug || "").toLowerCase().trim();
-  const blog = blogs.find((b) => {
+  const blog = allCandidateBlogs.find((b) => {
     if (!b) return false;
     const s = (b.slug || "").toLowerCase().trim();
     const id = (b.id || "").toLowerCase().trim();
@@ -91,8 +114,8 @@ function BlogDetailPage() {
   });
 
   // Compute Related Articles & Adjacent Previous/Next Posts
-  const relatedArticles = blog ? getRelatedArticles(blog, blogs, 3) : [];
-  const { prevBlog, nextBlog } = blog ? getAdjacentArticles(blog, blogs) : { prevBlog: null, nextBlog: null };
+  const relatedArticles = blog ? getRelatedArticles(blog, allCandidateBlogs, 3) : [];
+  const { prevBlog, nextBlog } = blog ? getAdjacentArticles(blog, allCandidateBlogs) : { prevBlog: null, nextBlog: null };
 
   // Calculate Reading Time dynamically if missing or default
   const readingTime = blog
@@ -197,7 +220,7 @@ function BlogDetailPage() {
   };
 
   if (!blog) {
-    if (loading) {
+    if (loading || !mounted) {
       return (
         <div className="min-h-screen bg-background flex flex-col justify-between">
           <SiteNav />

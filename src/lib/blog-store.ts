@@ -747,15 +747,46 @@ const STORAGE_KEY_CATS = "venus_blogs_categories_v21";
 export function getStoredBlogs(): BlogPost[] {
   if (typeof window === "undefined") return INITIAL_BLOGS;
   try {
+    // 1. Check current key
     const raw = localStorage.getItem(STORAGE_KEY_BLOGS);
-    if (!raw) {
-      localStorage.setItem(STORAGE_KEY_BLOGS, JSON.stringify(INITIAL_BLOGS));
-      return INITIAL_BLOGS;
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed;
+      }
     }
-    const parsed = JSON.parse(raw);
-    if (Array.isArray(parsed) && parsed.length > 0) {
-      return parsed;
+
+    // 2. Scan all prior version keys to ensure no user-edited articles are ever lost
+    for (let v = 20; v >= 1; v--) {
+      const prev = localStorage.getItem(`venus_blogs_data_v${v}`);
+      if (prev) {
+        try {
+          const parsed = JSON.parse(prev);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            localStorage.setItem(STORAGE_KEY_BLOGS, prev);
+            return parsed;
+          }
+        } catch {
+          // ignore corrupted legacy entries
+        }
+      }
     }
+
+    // 3. Check base key
+    const generic = localStorage.getItem("venus_blogs_data");
+    if (generic) {
+      try {
+        const parsed = JSON.parse(generic);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          localStorage.setItem(STORAGE_KEY_BLOGS, generic);
+          return parsed;
+        }
+      } catch {
+        // ignore
+      }
+    }
+
+    localStorage.setItem(STORAGE_KEY_BLOGS, JSON.stringify(INITIAL_BLOGS));
     return INITIAL_BLOGS;
   } catch {
     return INITIAL_BLOGS;
@@ -765,7 +796,11 @@ export function getStoredBlogs(): BlogPost[] {
 export function saveStoredBlogs(blogs: BlogPost[]) {
   if (typeof window === "undefined") return;
   try {
-    localStorage.setItem(STORAGE_KEY_BLOGS, JSON.stringify(blogs));
+    const serialized = JSON.stringify(blogs);
+    localStorage.setItem(STORAGE_KEY_BLOGS, serialized);
+    localStorage.setItem("venus_blogs_data_v20", serialized);
+    localStorage.setItem("venus_blogs_data", serialized);
+    window.dispatchEvent(new Event("venus_blogs_updated"));
   } catch (err) {
     console.error("Failed to save blogs to localStorage", err);
   }
@@ -775,14 +810,27 @@ export function getStoredCategories(): string[] {
   if (typeof window === "undefined") return INITIAL_CATEGORIES;
   try {
     const raw = localStorage.getItem(STORAGE_KEY_CATS);
-    if (!raw) {
-      localStorage.setItem(STORAGE_KEY_CATS, JSON.stringify(INITIAL_CATEGORIES));
-      return INITIAL_CATEGORIES;
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed;
+      }
     }
-    const parsed = JSON.parse(raw);
-    if (Array.isArray(parsed) && parsed.length > 0) {
-      return parsed;
+
+    for (let v = 20; v >= 1; v--) {
+      const prev = localStorage.getItem(`venus_blogs_categories_v${v}`);
+      if (prev) {
+        try {
+          const parsed = JSON.parse(prev);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            localStorage.setItem(STORAGE_KEY_CATS, prev);
+            return parsed;
+          }
+        } catch {}
+      }
     }
+
+    localStorage.setItem(STORAGE_KEY_CATS, JSON.stringify(INITIAL_CATEGORIES));
     return INITIAL_CATEGORIES;
   } catch {
     return INITIAL_CATEGORIES;
@@ -792,7 +840,10 @@ export function getStoredCategories(): string[] {
 export function saveStoredCategories(categories: string[]) {
   if (typeof window === "undefined") return;
   try {
-    localStorage.setItem(STORAGE_KEY_CATS, JSON.stringify(categories));
+    const serialized = JSON.stringify(categories);
+    localStorage.setItem(STORAGE_KEY_CATS, serialized);
+    localStorage.setItem("venus_blogs_categories_v20", serialized);
+    window.dispatchEvent(new Event("venus_blogs_updated"));
   } catch (err) {
     console.error("Failed to save categories to localStorage", err);
   }
@@ -807,6 +858,14 @@ export function useBlogs() {
     // Sync local storage on client mount
     setBlogs(getStoredBlogs());
     setCategories(getStoredCategories());
+
+    const handleStorageChange = () => {
+      setBlogs(getStoredBlogs());
+      setCategories(getStoredCategories());
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener("venus_blogs_updated", handleStorageChange);
 
     async function fetchFromApi() {
       try {
@@ -831,6 +890,11 @@ export function useBlogs() {
       }
     }
     fetchFromApi();
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("venus_blogs_updated", handleStorageChange);
+    };
   }, []);
 
   const addBlog = async (blog: BlogPost) => {
