@@ -4,7 +4,7 @@ import path from "path";
 
 // Read local .env if present
 const envFilePath = path.join(process.cwd(), ".env");
-let localEnv: Record<string, string> = {};
+let localEnv = {};
 
 if (fs.existsSync(envFilePath)) {
   const content = fs.readFileSync(envFilePath, "utf8");
@@ -21,7 +21,7 @@ if (fs.existsSync(envFilePath)) {
   });
 }
 
-const getEnv = (key: string) => process.env[key] || localEnv[key] || "";
+const getEnv = (key) => process.env[key] || localEnv[key] || "";
 
 const envVars = [
   { key: "DATABASE_URL", value: getEnv("DATABASE_URL") },
@@ -33,6 +33,15 @@ const envVars = [
   { key: "SMTP_FROM", value: getEnv("SMTP_FROM") || getEnv("SMTP_USER") },
   { key: "CONTACT_RECEIVER_EMAIL", value: getEnv("CONTACT_RECEIVER_EMAIL") || getEnv("SMTP_USER") },
   { key: "GROQ_API_KEY", value: getEnv("GROQ_API_KEY") },
+  {
+    key: "NEXT_PUBLIC_CRM_URL",
+    value: getEnv("NEXT_PUBLIC_CRM_URL") || "https://crm.venusglobaltech.com",
+  },
+  {
+    key: "VITE_CRM_URL",
+    value:
+      getEnv("VITE_CRM_URL") || getEnv("NEXT_PUBLIC_CRM_URL") || "https://crm.venusglobaltech.com",
+  },
 ].filter((e) => Boolean(e.value));
 
 console.log("==================================================");

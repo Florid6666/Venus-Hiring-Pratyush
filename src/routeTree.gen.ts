@@ -34,6 +34,7 @@ import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as CareersIndexRouteImport } from './routes/careers.index'
 import { Route as CareersSlugRouteImport } from './routes/careers.$slug'
+import { Route as CareersBoardRouteImport } from './routes/careers.board'
 import { Route as CareersResumeBuilderRouteImport } from './routes/careers.resume-builder'
 import { Route as IndustriesIndexRouteImport } from './routes/industries.index'
 import { Route as IndustriesSlugRouteImport } from './routes/industries.$slug'
@@ -170,6 +171,11 @@ const CareersSlugRoute = CareersSlugRouteImport.update({
   path: '/careers/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CareersBoardRoute = CareersBoardRouteImport.update({
+  id: '/careers/board',
+  path: '/careers/board',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CareersResumeBuilderRoute = CareersResumeBuilderRouteImport.update({
   id: '/careers/resume-builder',
   path: '/careers/resume-builder',
@@ -245,6 +251,7 @@ export interface FileRoutesByFullPath {
   '/api/salary-insights': typeof ApiSalaryInsightsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/careers/$slug': typeof CareersSlugRouteWithChildren
+  '/careers/board': typeof CareersBoardRoute
   '/careers/resume-builder': typeof CareersResumeBuilderRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
@@ -282,6 +289,7 @@ export interface FileRoutesByTo {
   '/api/salary-insights': typeof ApiSalaryInsightsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/careers/$slug': typeof CareersSlugRouteWithChildren
+  '/careers/board': typeof CareersBoardRoute
   '/careers/resume-builder': typeof CareersResumeBuilderRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
@@ -320,6 +328,7 @@ export interface FileRoutesById {
   '/api/salary-insights': typeof ApiSalaryInsightsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/careers/$slug': typeof CareersSlugRouteWithChildren
+  '/careers/board': typeof CareersBoardRoute
   '/careers/resume-builder': typeof CareersResumeBuilderRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
@@ -359,6 +368,7 @@ export interface FileRouteTypes {
     | '/api/salary-insights'
     | '/blog/$slug'
     | '/careers/$slug'
+    | '/careers/board'
     | '/careers/resume-builder'
     | '/industries/$slug'
     | '/services/$slug'
@@ -396,6 +406,7 @@ export interface FileRouteTypes {
     | '/api/salary-insights'
     | '/blog/$slug'
     | '/careers/$slug'
+    | '/careers/board'
     | '/careers/resume-builder'
     | '/industries/$slug'
     | '/services/$slug'
@@ -433,6 +444,7 @@ export interface FileRouteTypes {
     | '/api/salary-insights'
     | '/blog/$slug'
     | '/careers/$slug'
+    | '/careers/board'
     | '/careers/resume-builder'
     | '/industries/$slug'
     | '/services/$slug'
@@ -470,6 +482,7 @@ export interface RootRouteChildren {
   ApiSalaryInsightsRoute: typeof ApiSalaryInsightsRoute
   BlogSlugRoute: typeof BlogSlugRoute
   CareersSlugRoute: typeof CareersSlugRouteWithChildren
+  CareersBoardRoute: typeof CareersBoardRoute
   CareersResumeBuilderRoute: typeof CareersResumeBuilderRoute
   IndustriesSlugRoute: typeof IndustriesSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
@@ -660,6 +673,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CareersSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/careers/board': {
+      id: '/careers/board'
+      path: '/careers/board'
+      fullPath: '/careers/board'
+      preLoaderRoute: typeof CareersBoardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/careers/resume-builder': {
       id: '/careers/resume-builder'
       path: '/careers/resume-builder'
@@ -778,6 +798,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiSalaryInsightsRoute: ApiSalaryInsightsRoute,
   BlogSlugRoute: BlogSlugRoute,
   CareersSlugRoute: CareersSlugRouteWithChildren,
+  CareersBoardRoute: CareersBoardRoute,
   CareersResumeBuilderRoute: CareersResumeBuilderRoute,
   IndustriesSlugRoute: IndustriesSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,
